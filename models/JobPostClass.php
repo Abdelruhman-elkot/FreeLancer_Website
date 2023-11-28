@@ -1,5 +1,5 @@
 <?php
-class JobPost{
+class JobPostClass{
     private String $clientName;
 
     private String $title;

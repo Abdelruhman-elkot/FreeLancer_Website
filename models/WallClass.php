@@ -1,6 +1,6 @@
 <?php
-class Wall{
-    public function __construct(){
+class WallClass{
+public function __construct(){
 }
 public function displayPost(){
 }

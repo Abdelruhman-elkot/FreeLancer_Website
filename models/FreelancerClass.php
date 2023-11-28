@@ -1,5 +1,5 @@
 <?php
-class Freelancer{
+class FreelancerClass{
     private static $freelancerCounter;
 
     function getfreelancerCounter(){
