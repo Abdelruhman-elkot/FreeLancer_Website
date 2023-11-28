@@ -1,5 +1,5 @@
 <?php
-class Admin{
+class AdminClass{
     private static $adminCounter;
 
     public function __construct(){

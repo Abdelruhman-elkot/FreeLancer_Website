@@ -1,5 +1,5 @@
 <?php
-class Client{
+class ClientClass{
 
     private static $clientCounter;
 
