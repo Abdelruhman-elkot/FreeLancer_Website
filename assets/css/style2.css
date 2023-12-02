@@ -1,0 +1,207 @@
+/* FREELANCER STYLE SHEET */
+
+body{
+    background: #d1d5db;
+}
+
+.height{
+    height: 10vh;
+}
+
+.form{
+    position: relative;
+}
+
+.form .fa-search{
+    position: absolute;
+    top:10px;
+    left: 20px;
+    color: #9ca3af;
+}
+
+.form span{
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+}
+
+.left-pan{
+    padding-left: 7px;
+}
+
+.left-pan i{
+    padding-left: 10px;
+}
+
+.form-input{
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.form-input:focus{
+    box-shadow: none;
+    border:none;
+}
+
+
+.content-area {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 30px;
+}
+
+
+/* animation of posts */
+#postBox {
+    margin-bottom: 20px;
+    animation: myPost;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+@keyframes myPost {
+    from{margin-top: 100%;}
+    to{margin-top: 0;}
+}
+
+/* footer */
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 60px;
+}
+
+.footerText {
+    color: white;
+    margin-left: 20px ;
+}
+
+
+/* Job details buttons */
+    .postIcons{
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+    }
+    
+    .postIcons a{
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+        background-color: #1DA1F2;
+        border-radius:8px;
+        width: 150px;
+        text-align: center;
+    }
+    
+    .postIcons :hover{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+    
+
+    .jopDescription{
+    text-align: center;
+    font-weight: 800;
+    border: 1px solid black;
+    width: 70%;
+    margin-right: 50px;
+    height: 100%;
+    padding-bottom: 15px;
+    border-radius: 12px;
+    }
+    .jopDescription p{
+        margin-top: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .container{
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    .container button{
+    background-color: #1DA1F2;
+    border: 0;
+    padding: 14px 20px;
+    border-radius: 15px;
+    color: aliceblue;
+    font-weight: 800;
+    cursor: pointer;
+    }
+
+
+/* horizontal line */
+hr.topline {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+    margin-top: 150px;
+}
+
+/* animation of post details */
+#postFrame {
+    animation: myPost;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+
+
+
+
+/* apply from pop-up */
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgb(0 0 0/15%);
+    padding: 1em;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    text-align:center;
+    width: 500px;
+    transform: translate(-50%, -50%); 
+    transition: all .5s;
+    opacity: 0;
+}
+
+.card.open {
+    opacity: 1;
+    top: 70%;
+}
+
+
+.formbold-form-input {
+    width: 100%;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #DDE3EC;
+    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    color: #07074D;
+    outline: none;
+    resize: none;
+}
+.formbold-form-input::placeholder {
+    color: #536387;
+}
+.formbold-form-input:focus {
+    border-color: #6a64f1;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+.formbold-form-label {
+    color: #07074D;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+}
