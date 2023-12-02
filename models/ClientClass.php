@@ -1,5 +1,5 @@
 <?php
-class ClientClass{
+class ClientClass extends UserClass{
 
     private static $clientCounter;
 
@@ -30,9 +30,6 @@ class ClientClass{
 
     }
 
-    public function changePassword(){
-
-    }
     
 
 }

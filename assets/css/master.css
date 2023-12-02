@@ -36,7 +36,6 @@ p{
 }
 span{
     font-size: 14px;
-    margin-top: 25px;
 }
 a{
     color:#333;
@@ -203,7 +202,7 @@ input{
 }
 .overlay{
     
-    background-image: url('/Users/R/SW1_Project/assets/images/startup.jpg');
+    background-image: url('../imgs/startup.jpg');
     background-repeat:no-repeat;
     background-size: cover;
     background-position: 0 0;
