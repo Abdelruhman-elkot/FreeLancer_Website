@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 11:48 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Dec 08, 2023 at 08:59 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -138,7 +138,10 @@ INSERT INTO `savedposts` (`PostID`, `FreelancerId`) VALUES
 (3, 5),
 (2, 5),
 (2, 5),
-(1, 5);
+(1, 5),
+(1, 6),
+(1, 6),
+(1, 6);
 
 -- --------------------------------------------------------
 
@@ -152,21 +155,22 @@ CREATE TABLE `users` (
   `LastName` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `PhoneNumber` varchar(11) NOT NULL,
-  `ProfileImage` varchar(200) NOT NULL,
+  `ProfileImage` varchar(200) NOT NULL DEFAULT 'defaultimage.png',
   `UserRole` varchar(100) NOT NULL,
   `Username` varchar(200) NOT NULL,
   `userPassword` varchar(200) NOT NULL,
-  `TimeCreated` date NOT NULL DEFAULT current_timestamp()
+  `TimeCreated` date NOT NULL DEFAULT current_timestamp(),
+  `About` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`UserID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `ProfileImage`, `UserRole`, `Username`, `userPassword`, `TimeCreated`) VALUES
-(4, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01099803449', '', '', 'Abdelruhman_elkot#', 'JDWCSb8k', '2023-12-02'),
-(5, 'Ahmed', 'Ali', 'sffsgsg@ghdh.com', '02828277', '', '', 'Ahmed_Ali#', 'SC0YlhcM', '2023-12-02'),
-(6, 'Farah ', 'hossam', 'ziadadelashour@gmail.com', '01120011456', '', 'Freelancer', 'Farah _hossam#', 'K8oqcFLU', '2023-12-04');
+INSERT INTO `users` (`UserID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `ProfileImage`, `UserRole`, `Username`, `userPassword`, `TimeCreated`, `About`) VALUES
+(4, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01099803449', 'defaultimage.png', 'Admin', 'Abdelruhman_elkot#4', 'JDWCSb8k', '2023-12-02', ''),
+(5, 'Ziad', 'Yasser', 'ZiadYasser@gmail.com', '01120011456', 'defaultimage.png', 'Client', 'Ziad_Yasser#5', 'SC0YlhcM', '2023-12-02', ''),
+(6, 'Farah ', 'Hossam', 'ziadadelashour@gmail.com', '01120011456', 'defaultimage.png', 'Freelancer', 'Farah_Hossam#6', 'K8oqcFLU', '2023-12-04', '');
 
 --
 -- Indexes for dumped tables

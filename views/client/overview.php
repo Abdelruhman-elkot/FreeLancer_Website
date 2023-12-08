@@ -1,43 +1,16 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    
-    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../assets/css/style.css" rel="stylesheet">
-
-</head>
-<body>
-
-    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
-    <header id="header">
-      <div class="d-flex flex-column">
-  
-        <div class="profile">
-          <img src="../../assets/imgs/profile.jpg" alt="" class="img-fluid rounded-circle">
-          <h1 class="text-light"><?php echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];?></h1>
-          <div class="social-links mt-3 text-center">
-            <a href="https://twitter.com" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="https://www.facebook.com" class="facebook"><i class="bx bxl-facebook"></i></a>
-            <a href="https://www.instagram.com" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="https://www.linkedin.com" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-          </div>
-        </div>
+<?php 
+session_start();
+if($_SESSION['username'] && $_SESSION['userRole'] == "Client")
+{
+require "../../include/headerProfile.php";
+?>
   
         <nav id="navbar" class="nav-menu navbar">
           <ul>
             <li><a href="#overview" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Overview</span></a></li>
             <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
             <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
+            <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
           </ul>
         </nav>
       </div>
@@ -81,7 +54,9 @@
                     <div class="col-md-5">
                         <div class="col-sm-5 col-md-5">
                           <div class="about-img">
-                            <img src="../../assets/imgs/profile.jpg" class="img-fluid box-shadow-a rounded-circle" alt="profile image">
+                          <div class="about-img">
+                                <img src="<?php echo '../../assets/imgs/' . $_SESSION['profileimage']; ?>" alt="Profile Image" class="img-fluid box-shadow-a rounded-circle">
+                            </div>
                           </div>
                         </div>
                       <div class="skill-mf lead">
@@ -118,19 +93,16 @@
           </div>
         </section>
 
-    </main>
+        <?php
+        include '../shared/logout.php';
+        ?>
 
-    <footer id="footer">
-        <div class="container">
-          <div class="copyright">
-            &copy; Copyright <strong><span>Freelancer</span></strong>
-          </div>
-          <div class="credits">
-            Designed by <a href="https://www.facebook.com">Abdelruhman_elkot</a>
-        </div>        
-        </div>
-      </footer>
-      
-      <script src="../../assets/js/main.js"></script>
-</body>
-</html>
+    </main>
+    
+<?php
+require "../../include/footerProfile.php";
+}
+else {
+  header("Location:../../index.php");
+}
+?>

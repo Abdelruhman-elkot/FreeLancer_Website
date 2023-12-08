@@ -1,71 +1,65 @@
 <?php
-class JobPostClass{
-    private String $clientName;
+class JobPost{
 
-    private String $title;
+    protected $ID;
+    protected $clientID;
+    protected $clientName;
+    protected $jobType;
+    protected $jobBudget;
+    protected $creationDate;
+    protected $description;
+    protected $numProposals;
+    protected $status;
 
-    private String $jobTitle;
-
-    private String $fixedOrHourly;
-
-    private int $jobBudget;
-
-    private String $postCreator;
-
-    private string $date;
-
-    private String $jopDescription;
-
-    private int $numberOfProposal;
-
-    function setTitle(string $title) {
-        $this->title = $title;
-    
+    public function __construct($jobType, $jobBudget, $description, $numProposals, $status){
+        $this->jobType = $jobType;
+        $this->jobBudget = $jobBudget;
+        $this->description = $description;
+        $this->numProposals = $numProposals;
+        $this->status = $status;
     }
-    function setJobTitle(String $jobTitle) {
-        $this->jobTitle = $jobTitle;
+
+
+    // Setter 
+    function setJobType($jobType){
+        $this->jobType = $jobType;
     }
-    function setfixedOrHourly(String $fixedOrHourly) {
-        $this->fixedOrHourly = $fixedOrHourly;
-    }
-    function setJobBudget(int $jobBudget) {
+    function setJobBudget($jobBudget){
         $this->jobBudget = $jobBudget;
     }
-    function setPostCreator(String $postCreator) {
-        $this->postCreator = $postCreator;
+    function setDescription($description){
+        $this->description = $description;
     }
-    function setDate(String $date) {
-        $this->date = $date;
+    function setStatus($status){
+        $this->status = $status;
     }
-    function setJopDescription(String $jopDescription) {
-        $this->jopDescription = $jopDescription;
+    // Getter
+    function getID(){
+        return $this->ID;
     }
-    function setNumberOfProposal(int $numberOfProposal) {
-        $this->numberOfProposal = $numberOfProposal;
+    function getClientID(){
+        return $this->clientID;
     }
-    function getTitle() {
-        return $this->title;
+    function getClientName(){
+        return $this->clientName;
     }
-    function getJobTitle(){
-        return $this->jobTitle;
+    function getJobType(){
+        return $this->jobType;
     }
-    function getfixedOrHourly() {
-        return $this->fixedOrHourly;
-    }
-    function getJobBudget() {
+    function getJobBudget(){
         return $this->jobBudget;
     }
-    function getPostCreator() {
-        return $this->postCreator;
+    function getCreationDate(){
+        return $this->creationDate;
     }
-    function getDate() {
-        return $this->date;
+    function getDescription(){
+        return $this->description;
     }
-    function getJopDescription() {
-        return $this->jopDescription;
+    function getNumProposals(){
+        return $this->numProposals;
     }
-    function getNumberOfProposal() {
-        return $this->numberOfProposal;
+    function getStatus(){
+        return $this->status;
     }
 }
 ?>

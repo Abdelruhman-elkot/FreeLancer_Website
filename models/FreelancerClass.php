@@ -1,5 +1,5 @@
 <?php
-class FreelancerClass{
+class Freelancer extends User{
     private static $freelancerCounter;
 
     function getfreelancerCounter(){
@@ -10,22 +10,22 @@ class FreelancerClass{
 
     }
 
-    public function viewJobPost(){
+    public function viewAllJobPosts(){
+
+    }
+    public function viewClientPosts(Client $client){
+
+    }
+
+    public function searchForJop($title, $date, $clientName){
     
     }
-    public function viewClientPost(){
+
+    public function saveJobPost(){
 
     }
 
-    public function searchForJop( String $ClientName){
-    
-    }
-
-    public function savePost(){
-
-    }
-
-    public function applyForJob(){
+    public function applyToJob(){
         
     }
 

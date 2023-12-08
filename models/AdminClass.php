@@ -1,5 +1,5 @@
 <?php
-class AdminClass{
+class Admin extends User{
     private static $adminCounter;
 
     public function __construct(){
