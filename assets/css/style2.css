@@ -205,3 +205,19 @@ hr.topline {
     display: block;
     margin-bottom: 10px;
 }
+
+.searchBar{
+    display: flex;
+    margin-right: 130px;
+}
+
+.searchBar form{
+    display: flex;
+}
+
+.searchBar button{
+    height:40px;
+    padding-top: 8px;
+    border-radius: 0 12px 12px 0;
+}
+

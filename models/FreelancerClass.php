@@ -11,13 +11,13 @@ class FreelancerClass{
     }
 
     public function viewJobPost(){
-
+    
     }
     public function viewClientPost(){
 
     }
 
-    public function searchForJop( String $jobTitle){
+    public function searchForJop( String $ClientName){
     
     }
 

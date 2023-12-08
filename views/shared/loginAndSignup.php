@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../assets/css/master.css">
     <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
 
-    <title>Sign</title>
+    <title>Sign in</title>
 </head>
 
 <body>

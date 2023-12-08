@@ -24,6 +24,7 @@
                         $_SESSION['lastname'] = $row['LastName'];
                         $_SESSION['phonenumber'] = $row['PhoneNumber'];
                         $_SESSION['email'] = $row['Email'];
+                        $_SESSION['ID']=$row['UserID'];
                         header("Location:../index.php");
                     }else{
                         echo "<script>alert('wrong password');</script>";
@@ -36,4 +37,13 @@
             }
         }
     }
+    
+    
+    /* // 7war el apply wl save
+    if(empty($_SESSION['username'])){
+        echo "<script>alert('Login First');</script>";
+        header("location: ../views/shared/loginAndSignup.php")
+    }else{
+        
+    } */
 ?>

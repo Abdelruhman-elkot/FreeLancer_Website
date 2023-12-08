@@ -1,3 +1,11 @@
+<?php 
+include '../../include/DatabaseClass.php'; 
+    
+    session_start();
+
+?> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +39,7 @@
 </head>
 <body>
 <!--Header-->
-    <header id="header" class="w-100 bg-black fixed-top">
+    <header id="header" class="w-100 bg-black " style="position: relative; padding-left:50px;">
         <div class="container d-flex align-items-center">
     
         <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
@@ -41,16 +49,22 @@
         <nav id="navbar" class="navbar">
             <ul>
             <li><a class="nav-link scrollto" href="#">Home</a></li>
-            <li><a class="nav-link scrollto active" href="posts.html">Posts</a></li>
+            <li><a class="nav-link scrollto active" href="posts.php">Posts</a></li>
 
             <li class="dropdown"><a href="#" style="text-decoration: none;"><span>More</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Log in</a></li>
+                <?php if(isset($_SESSION['username'])){ ?>
+                <li><a href="savedPosts.php" style="text-decoration:none"> Saved Posts </a></li>
+                <li><a href="#" style="text-decoration:none">Log Out</a></li>
+
+                <?php } else { ?>
+                    <li><a href="../shared/loginAndSignup.php" style="text-decoration:none"> Register </a></li>
+                    <li><a href="../shared/loginAndSignup.php" style="text-decoration:none">Log in</a></li>
+                    <?php } ?>
                 </ul>
             </li>
 
-            <li><a class="getstarted scrollto" href="#" style="text-decoration: none;">Get Started</a></li>
+            
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -63,22 +77,42 @@
 <hr class="topline">
 
 <!-- Post details -->
-<div class="container" style="margin-top: 60px; margin-left: 60px;">
+<?php
+
+$db = new database();
+$conn = $db->getConnection();
+
+$post = $conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
+jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
+from jobposts
+join users on users.UserID = jobposts.ClientID  WHERE PostID =". $_GET['PostID'] );
+
+if ($post && $post->num_rows > 0) {
+    $row = $post->fetch_assoc();
+    
+    $clientName = $row['FirstName'];
+    $jobPostTitle = $row['JobPostTitle'];
+    $postDate = $row['CreationDate'];
+    $numProposals = $row['ProposalCount'];
+    $jobDescription = $row['JobDescription'];
+    $postID = $row['PostID'];
+    $jobType = $row['JobType'];
+    $budget = $row['JobBudget'];
+    $noOfProposals = $row['ProposalCount'];
+    $deadline = $row['CreationDate'];
+
+}
+echo '<div class="container" style="margin-top: 60px; margin-left: 60px;">
     <div class="row g-5" id="postFrame">
     <div class="col-md-8" >
 
         <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1">Job Title</h2>
-            <p class="blog-post-meta">December 14, 2020 by <a href="#" style="text-decoration: none;">@client name</a></p>
+            <h2 class="display-5 link-body-emphasis mb-1">'.$jobPostTitle.'</h2>
+            <p class="blog-post-meta">'.$postDate.'<a href="#" style="text-decoration: none;"> By @'.$clientName.'</a></p>
 
-    <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto voluptates in debitis, maiores doloribus laborum nihil similique laudantium saepe dignissimos facilis assumenda nesciunt vero quae quis voluptatibus nulla. Nam, commodi!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur molestiae earum eligendi fuga vero? Iste aperiam corrupti rerum voluptatem magnam aut asperiores laborum laboriosam ex dignissimos debitis, impedit velit reprehenderit?
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium neque pariatur harum vitae earum? Sapiente asperiores mollitia vel in unde deleniti, iste sint dolores molestiae veniam ipsum ea atque saepe.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nihil consectetur odio nisi quam commodi, ducimus nam omnis distinctio, et saepe libero, aliquam obcaecati sed! Doloremque odit deleniti modi natus!
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore tenetur non fuga labore deleniti asperiores inventore sunt ullam quasi atque tempore cumque, quibusdam magni veniam maxime error debitis distinctio eos.
-        Lorem ipsum dolor, sit amet consectetur adipisic
-    </p>
+    <p>'.
+    $jobDescription
+    .'</p>
     
         </article>
 </div>
@@ -87,23 +121,37 @@
     <div class="col-md-4">
     <div class="class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 bg-body-tertiary rounded">
-        <p> <i class="fa-regular fa-clock"></i> <strong>  Job Type: </strong> Full time </p>
-            <p> <i class="fa-solid fa-dollar-sign"></i><strong>  Budget: </strong> 3000</i></p>
-            <p> <i class="fa-solid fa-person"></i><strong>  No of proposal: </strong> 250</p>
-            <p> <i class="fa-regular fa-bell"></i><strong>  Deadline: </strong> 2 days left</i></p>
+        <p> <i class="fa-regular fa-clock"></i> <strong>  Job Type: </strong>'. $jobType .'</p>
+            <p> <i class="fa-solid fa-dollar-sign"></i><strong>  Budget: </strong>'.  $budget.'</i></p>
+            <p> <i class="fa-solid fa-person"></i><strong>  No of proposal: </strong>'.  $noOfProposals.'</p>
+            <p> <i class="fa-regular fa-bell"></i><strong>  Deadline: </strong>'.  $deadline.'</i></p>
         </div>
     </div>
     </div>
 <hr>
 <!-- buttons -->
+
 <nav class="blog-pagination" aria-label="Pagination">
     <div class="postIcons" style="margin-bottom: 20px;">
-        <button href="" onclick="show_pup()"><i class="fa-solid fa-arrow-up"></i></span>  Apply</button>
-        <button href=""><i class="fa-solid fa-star"></i>  Save Post</button>
-    </div>
+        <button href="" onclick="show_pup()" name="apply-btn" ><i class="fa-solid fa-arrow-up"></i></span>  Apply</button>
+        
+
+        <form action="../../controllers/SavedButton.php" method="POST">' ?>
+        <?php if(isset($_SESSION['username'])) { ?>
+            <?php echo '<div><input type="hidden" name="FreelancerID" value="'.$_SESSION['ID'].'"></div>'; ?>
+        <?php } else { ?>
+            <?php echo '<div><input type="hidden" name="FreelancerID" value=""></div>'; ?>
+        <?php } ?>
+        <?php echo '<div><input type="hidden" name="PostID" value="'.$postID.'"></div>'; ?>
+        <div><input type="submit"  name="saved-btn" class="btn btn-primary" value="Save post" style="height:50px; background-color:1DA1F2"></div> 
+
+        
+</form>
+</div>
 </nav>
 
 </div>
+
 
 <!-- apply form pop up -->
 <div class="card" id="pup">
@@ -112,19 +160,20 @@
         <div class="modal-content rounded-4 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <h1 class="fw-bold mb-0 fs-2">Apply Form</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hide_pup()"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hide_pup()" ></button>
             </div>
 
             <div class="modal-body p-5 pt-0">
-            <form class="">
+
+            <form class="" method="post" action="../../controllers/applyform.php">
 
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" name="Email">
                     <label for="floatingInput">Email address</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control rounded-3" id="floatingPassword" placeholder="0123456789">
+                    <input type="number" class="form-control rounded-3" id="floatingPassword" placeholder="0123456789" name="PhoneNum">
                     <label for="floatingPassword">Phone Number</label>
                 </div>
 
@@ -139,17 +188,20 @@
                         ></textarea>
                     </div>
                 </div>
-                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Apply Now!</button>
+                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="apply-btn">Apply Now!</button>
             </form>
             </div>
         </div>
         </div>
     </div>
     </div>
+
 <!-- end of apply form pop up -->
 
-</div> <!--end of container div-->
 
+
+
+</div> <!--end of container div-->
 
 <!-- footer -->
     <div class="footer">
