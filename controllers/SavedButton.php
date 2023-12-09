@@ -17,8 +17,8 @@
         
         }else{
 
-            $conn = $db->getConnection();
-            $FreeLancerId=$_SESSION['ID'];
+            // $conn = $db->getConnection();
+            $FreeLancerId=$_SESSION['id'];
             $PostId=$_POST['PostID'];
     
             $sql = "INSERT INTO savedposts( PostID, FreelancerId) VALUES ('$PostId', '$FreeLancerId' )";

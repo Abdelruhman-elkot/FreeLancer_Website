@@ -69,10 +69,9 @@ include '../../include/DatabaseClass.php';
     <?php 
 
     $db = new database();
-    $conn = $db->getConnection();
 
-    $freeLancerId=$_SESSION['ID'];
-    $result = $conn->query("Select DISTINCT jobposts.JobType , jobposts.JobBudget, jobposts.JobDescription,jobposts.ProposalCount,jobposts.JobPostTitle,
+    $freeLancerId=$_SESSION['id'];
+    $result = $db->conn->query("Select DISTINCT jobposts.JobType , jobposts.JobBudget, jobposts.JobDescription,jobposts.ProposalCount,jobposts.JobPostTitle,
     jobPosts.ClientID,
     jobPosts.PostID,
     jobPosts.CreationDate,

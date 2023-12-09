@@ -9,7 +9,7 @@
         $freelancerID = $_GET['FreelancerId'];
         
 
-        $conn = $db->getConnection();
+        // $conn = $db->getConnection();
 
         $sql = "DELETE FROM savedposts WHERE PostID='$postID' AND FreelancerId='$freelancerID'";
         $db->delete($sql);

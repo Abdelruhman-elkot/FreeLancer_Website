@@ -80,9 +80,8 @@ include '../../include/DatabaseClass.php';
 <?php
 
 $db = new database();
-$conn = $db->getConnection();
 
-$post = $conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
+$post = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
 jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
 from jobposts
 join users on users.UserID = jobposts.ClientID  WHERE PostID =". $_GET['PostID'] );
@@ -138,7 +137,7 @@ echo '<div class="container" style="margin-top: 60px; margin-left: 60px;">
 
         <form action="../../controllers/SavedButton.php" method="POST">' ?>
         <?php if(isset($_SESSION['username'])) { ?>
-            <?php echo '<div><input type="hidden" name="FreelancerID" value="'.$_SESSION['ID'].'"></div>'; ?>
+            <?php echo '<div><input type="hidden" name="FreelancerID" value="'.$_SESSION['id'].'"></div>'; ?>
         <?php } else { ?>
             <?php echo '<div><input type="hidden" name="FreelancerID" value=""></div>'; ?>
         <?php } ?>

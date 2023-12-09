@@ -17,7 +17,7 @@ if(isset($_POST['apply-btn'])){
     if (empty($_POST['Email']) OR empty($_POST['PhoneNum'])){
         echo "<script>alert('some inputs are empty');</script>";
     }else{
-        $conn = $db->getConnection();
+        // $conn = $db->getConnection();
         $Email = $_POST['Email'];
         $phonenumber = $_POST['PhoneNum'];
         $skills = $_POST['message'];

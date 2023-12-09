@@ -124,9 +124,7 @@ include '../../include/DatabaseClass.php';
 
         $search = $_POST['search-input'];
 
-        $conn = $db->getConnection();
-
-        $result = $conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
+        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
         jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
         from jobposts
         join users on users.UserID = jobposts.ClientID 
@@ -205,9 +203,8 @@ include '../../include/DatabaseClass.php';
     }
     }else{
         $db = new database();
-        $conn = $db->getConnection();
 
-        $result = $conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
+        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
         jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
         from jobposts
         join users on users.UserID = jobposts.ClientID ");
