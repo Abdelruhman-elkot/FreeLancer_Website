@@ -2,6 +2,8 @@
 
 include_once '../include/DatabaseClass.php';		
 $db = new database();
+include "../models/AdminClass.php";
+$admin = new Admin();
 
 if (isset($_POST['submit'])) {
 
@@ -39,6 +41,9 @@ if (isset($_POST['submit'])) {
 
         $sql = "UPDATE users SET Username = '$username' WHERE UserID = '".$row['UserID']."'";
         $db->update($sql);
+
+        $admin->SendMail($email,$firstname,$username,$randompassword);
+
 
         header("Location: ../index.php");
     }
