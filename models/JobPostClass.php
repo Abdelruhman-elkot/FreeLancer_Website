@@ -10,12 +10,20 @@ class JobPost{
     protected $description;
     protected $numProposals;
     protected $status;
+    protected $jobPostTitle;
+    protected $postDate;
 
-    public function __construct($jobType, $jobBudget, $description, $numProposals, $status){
+
+
+    public function __construct($jobType, $jobBudget, $description, $numProposals,$clientName, $jobPostTitle, $postDate, $ID, $status ){
         $this->jobType = $jobType;
         $this->jobBudget = $jobBudget;
         $this->description = $description;
         $this->numProposals = $numProposals;
+        $this->clientName= $clientName;
+        $this->jobPostTitle = $jobPostTitle;
+        $this->postDate = $postDate;
+        $this->ID = $ID;
         $this->status = $status;
     }
 
@@ -50,7 +58,7 @@ class JobPost{
         return $this->jobBudget;
     }
     function getCreationDate(){
-        return $this->creationDate;
+        return $this->postDate;
     }
     function getDescription(){
         return $this->description;
@@ -61,5 +69,10 @@ class JobPost{
     function getStatus(){
         return $this->status;
     }
+
+    function getjobPostTitle(){
+        return $this->jobPostTitle;
+    }
+    
 }
 ?>

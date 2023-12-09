@@ -1,9 +1,9 @@
 
 <?php 
-include '../../include/DatabaseClass.php'; 
-    
     session_start();
-
+    include '../../include/DatabaseClass.php'; 
+    include_once '../../models/JobPostClass.php';
+    include_once '../../models/FreelancerClass.php';
 ?> 
 
 <!DOCTYPE html>
@@ -37,116 +37,80 @@ include '../../include/DatabaseClass.php';
     
     <link rel="stylesheet" href="../../assets/css/style2.css">
 </head>
+
 <body>
-    <!--Header-->
+
+<!--Header-->
     <header id="header" class="w-100 bg-black " style="position: relative; padding-left:30px; ">
         <div class="container d-flex align-items-center">
-    
-        <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-    
-        <nav id="navbar" class="navbar">
-            <ul>
-            <li><a class="nav-link scrollto" href="#">Home</a></li>
-            <li><a class="nav-link scrollto" href="posts.php">Posts</a></li>
-            <li><a class="nav-link scrollto active" href="savedPosts.php">Saved Posts</a></li>
-
-
-        
-
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+            <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="#">Home</a></li>
+                        <li><a class="nav-link scrollto" href="posts.php">Posts</a></li>
+                        <li><a class="nav-link scrollto active" href="savedPosts.php">Saved Posts</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
         </div>
     </header>
 <!-- end of header -->
 
-<hr >
+<hr>
 
-
-    <?php 
-
-    $db = new database();
+<?php 
 
     $freeLancerId=$_SESSION['id'];
-    $result = $db->conn->query("Select DISTINCT jobposts.JobType , jobposts.JobBudget, jobposts.JobDescription,jobposts.ProposalCount,jobposts.JobPostTitle,
-    jobPosts.ClientID,
-    jobPosts.PostID,
-    jobPosts.CreationDate,
-    users.FirstName
-    from savedposts 
-    join jobposts on jobposts.PostID = savedposts.PostID
-    join users on users.UserID = jobposts.ClientID
-    WHERE savedposts.FreelancerId = $freeLancerId;" );
 
-    if($result){
-        echo '<div class="content-area" <?php echo $style; ?> 
-                <div class="row mb-2">';
-                echo '<div><h1 style="margin-bottom:50px; text-align:center; font-weight:900;" >  Saved posts </h1></div>';
-                echo '<hr style="margin-bottom:40px">';
-                while($row=mysqli_fetch_assoc($result)){
-                    // echo post content
-                    $clientName = $row['FirstName'];
-                    $jobPostTitle = $row['JobPostTitle'];
-                    $date =$row['CreationDate'];
-                    $numProposals = $row['ProposalCount'];
-                    $jobDescription = $row['JobDescription'];
-                    $postID = $row['PostID'];
-                
-                    echo '<div class="col-md-6" id="postBox">';
-                    echo '<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" 
-                        style="background-color: black;">';
-                    echo '<div class="col p-4 d-flex flex-column position-static" style="color: white;">';
-                    echo '<strong class="d-inline-block mb-2 text-primary-emphasis">' .$clientName. '</strong>';
-                    echo '<h3 class="mb-0">'.$jobPostTitle .'</h3>';
-                            echo '<div style="color: rgb(154, 149, 149);">';
-                            echo '<span><i class="bi bi-calendar"></i>   Posted in : '  .  $date. '</span>';
-                            echo '<span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:' .$numProposals.'</span>';
-                            echo '</div>';
-                        echo '<p class="card-text mb-auto">'.$jobDescription.'</p>';
-                        echo '<div>'; ?>
-                            <span style="float: right;">
-                            <a href="postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
-                            text-decoration: none;
-                            text-align: center;
-                            display: inline-block;
-                            font-size: 16px;
-                            color: white; 
-                            background-color: #1DA1F2;
-                            border-radius: 12px;
-                            padding: 8px;
-                            margin: 4px 2px;
-                            font-weight: 700px;
-                            width: 150px;
-                            margin-top: 15px;
-                            " 
-                            id="btn-send" onclick="show_pup()">
-                            View Details  <i class="bi bi-arrow-right-circle"></i>
+    $freeLancer = new Freelancer();
+
+    $result = $freeLancer->viewSavedPosts($freeLancerId);
+
+    if($result){ ?>
+        <div class="content-area" >
+            <div class="row mb-2">
+                <div><h1 style="margin-bottom:50px; text-align:center; font-weight:900;" >  Saved posts </h1></div>
+                    <hr style="margin-bottom:40px">
+
+                <?php while($row=mysqli_fetch_assoc($result)){
+                    $JobPost = new JobPost($row['JobType'],$row['JobBudget'], $row['JobDescription'], $row['ProposalCount'], $row['FirstName'], $row['JobPostTitle'], $row['CreationDate'], $row['PostID']);
+                ?>
+                    <div class="col-md-6" id="postBox">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" 
+                            style="background-color: black;">
+                            <div class="col p-4 d-flex flex-column position-static" style="color: white;">
+                                <strong class="d-inline-block mb-2 text-primary-emphasis"> <?php echo $JobPost->getClientName(); ?> </strong>
+                                <h3 class="mb-0"> <?php echo $JobPost->getjobPostTitle(); ?> </h3>
+                                    <div style="color: rgb(154, 149, 149);">
+                                <span><i class="bi bi-calendar"></i> <?php echo $JobPost->getCreationDate(); ?> </span>
+                                <span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:  <?php echo $JobPost->getNumProposals(); ?> </span>
+                            </div>
+                                <p class="card-text mb-auto"> <?php echo $JobPost->getDescription(); ?> </p>
+                            <div>
+                                <span style="float: right;">
+                                <a href="postDetails.php?PostID=<?php echo ($JobPost->getID()); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
+                                        text-decoration: none;
+                                        text-align: center;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        color: white; 
+                                        background-color: #1DA1F2;
+                                        border-radius: 12px;
+                                        padding: 8px;
+                                        margin: 4px 2px;
+                                        font-weight: 700px;
+                                        width: 150px;
+                                        margin-top: 15px;
+                                        " 
+                                        id="btn-send" onclick="show_pup()"> View Details  <i class="bi bi-arrow-right-circle"></i>
                             </a>
                             </span>
-
                         </div>
                         </div>
                     </div>
                     </div>
-                    <?php
-
-                    
-                    
-            
-                }
-    
-    }
-    ?>
-    
-    
-    <div class="content-area" > 
-    <div class="row mb-2">
-<!-- echo saved posts  -->
-</div>
-</div>
+    <?php  }
+    } ?>
 
 
 <!-- footer -->

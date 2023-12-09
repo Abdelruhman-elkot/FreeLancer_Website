@@ -14,7 +14,7 @@ class User {
     private static $userCounter;
     
     function __construct() {
-        include_once '../include/DatabaseClass.php';
+        include_once 'C:\xampp\htdocs\SW1_Project\include/DatabaseClass.php';
         $this->db = new database();
     }
     
