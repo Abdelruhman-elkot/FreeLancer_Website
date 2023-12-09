@@ -12,38 +12,53 @@ class Admin extends User
 
     public function addUser()
     {
+
     }
 
-    public function removeUser()
+    public function removeUser($userID)
     {
+        $db = new database();
+        $sql = "DELETE FROM users WHERE UserID = '$userID'";
+        $db->delete($sql);    
     }
 
     public function allotUsername()
     {
     }
 
-    public function allotPassword()
+    function generatePassword($length = 8)
     {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $password = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $password;
     }
 
-    public function addToWall()
+
+    public function removePost($postID)
     {
+        $db = new database();
+        $sql = "DELETE FROM jobposts WHERE PostID = '$postID'";
+        $db->delete($sql); 
     }
 
-    public function addJobPost()
+    public function acceptPost($postID) 
     {
+        $sql = "UPDATE jobposts SET Status = 'Accept' WHERE PostID = '$postID'";
+        $db = new database();
+        $db->update($sql);
+
     }
 
-    public function removejobPost()
+    public function refusePost($postID)
     {
-    }
-
-    public function acceptJobPost()
-    {
-    }
-
-    public function refuseJobPost()
-    {
+        $sql = "UPDATE jobposts SET Status = 'Refuse' WHERE PostID = '$postID'";
+        $db = new database();
+        $db->update($sql);
     }
 
     public function updateJobPost()
