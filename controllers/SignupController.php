@@ -2,6 +2,8 @@
 
 include_once '../include/DatabaseClass.php';		
 $db = new database();
+include "../models/AdminClass.php";
+$admin = new Admin();
 
 if (isset($_POST['submit'])) {
 
@@ -16,19 +18,8 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $role = $_POST['userRole'];
 
-        function generateRandomPassword($length = 8)
-        {
-            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            $password = '';
 
-            for ($i = 0; $i < $length; $i++) {
-                $password .= $characters[rand(0, strlen($characters) - 1)];
-            }
-
-            return $password;
-        }
-
-        $randompassword = generateRandomPassword();
+        $randompassword = $admin->generatePassword();
         // $password = password_hash($randompassword, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO users (FirstName, LastName, PhoneNumber, Email, UserRole, userPassword) VALUES ('$firstname', '$lastname', '$phonenumber', '$email', '$role', '$randompassword')";
@@ -39,6 +30,9 @@ if (isset($_POST['submit'])) {
 
         $sql = "UPDATE users SET Username = '$username' WHERE UserID = '".$row['UserID']."'";
         $db->update($sql);
+
+        $admin->SendMail($email,$firstname,$username,$randompassword);
+
 
         header("Location: ../index.php");
     }
