@@ -1,9 +1,8 @@
 
-<?php 
-include '../../include/DatabaseClass.php'; 
-    
+<?php  
+    include_once '../../models/JobPostClass.php';
+    include_once '../../models/FreelancerClass.php';
     session_start();
-
 ?> 
 
 
@@ -44,43 +43,31 @@ include '../../include/DatabaseClass.php';
 <!--Header-->
     <header id="header" class="w-100 bg-black fixed-top" style="padding-left:60px;">
     <div class="container d-flex align-items-center">
-
         <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
         <nav id="navbar" class="navbar">
         <ul>
             <div class="searchBar">
             <form class="col-13 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search"  name="search-input" style="width:400px; border-radius:12px 0 0 12px;">
-                
                 <button class="search-control" name="search-btn"><i class="bi bi-search"></i></button>
             </form>
             </div>
             <li><a class="nav-link scrollto" href="#">Home</a></li>
             <li><a class="nav-link scrollto active" href="posts.php" name="posts-btn">Posts</a></li>
-
-
             <li class="dropdown"><a href="#" style="text-decoration: none;"><span>More</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
+                <ul>
                 <?php if(isset($_SESSION['username'])){ ?>
-                <li><a href="savedPosts.php" style="text-decoration:none"> Saved Posts </a></li>
-                <li><a href="#" style="text-decoration:none">Log Out</a></li>
-
+                    <li><a href="savedPosts.php" style="text-decoration:none"> Saved Posts </a></li>
+                    <li><a href="#" style="text-decoration:none">Log Out</a></li>
                 <?php } else { ?>
                     <li><a href="../shared/loginAndSignup.php" style="text-decoration:none"> Register </a></li>
                     <li><a href="../shared/loginAndSignup.php" style="text-decoration:none">Log in</a></li>
-                    <?php } ?>
-            </ul>
+                <?php } ?>
+                </ul>
             </li>
-            
-
-
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+        </nav>
     </div>
     </header>
 <!-- end of header -->
@@ -91,49 +78,35 @@ include '../../include/DatabaseClass.php';
                     background-position: center;
                     background-size: cover;
                     padding-top: 50px;">
-
         <div class="container">
-        <div class="row">
-            <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                <h1>Creative Jobs</h1>
-                <h2>Discover your next career move, freelance gig, or internship</h2>
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <h1>Creative Jobs</h1>
+                    <h2>Discover your next career move, freelance gig, or internship</h2>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 <!-- end of image -->
 
 <hr> 
-<!-- show posts -->
-
-
 
 <!-- Search php -->
-<!-- show posts -->
 <?php
 
     $style= "";
 
     if(isset($_POST['search-btn'])){
-        
-
 
         $style="style = 'display:none;'";    
-        
-        $db = new database();
 
         $search = $_POST['search-input'];
 
-        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-        jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
-        from jobposts
-        join users on users.UserID = jobposts.ClientID 
-        Where JobPostTitle like '%$search%' or JobDescription like '%$search%'   " );
-
-        
-        if($search==''){
-            echo '<div style="display:flex; justify-content:center; margin-top:80px; margin-bottom:80px;"><h2 style:"color:Black ; font-weight:800;">Enter search Key input first</h2></div>';
-        }else{
+        $freelancer = new Freelancer();
+        $result = $freelancer->searchForJop($search);
+            if($search==''){ ?>
+                <div style="display:flex; justify-content:center; margin-top:80px; margin-bottom:80px;"><h2 style:"color:Black ; font-weight:800;">Enter search Key input first</h2></div>
+<?php        }else{
         if($result){
             if(mysqli_num_rows($result)>0){
                 // echo post container
@@ -142,27 +115,23 @@ include '../../include/DatabaseClass.php';
 
                 while($row=mysqli_fetch_assoc($result)){
                     // echo post content
-                    $clientName = $row['FirstName'];
-                    $jobPostTitle = $row['JobPostTitle'];
-                    $postDate = $row['CreationDate'];
-                    $numProposals = $row['ProposalCount'];
-                    $jobDescription = $row['JobDescription'];
-                    $postID = $row['PostID'];
+
+                    $JobPost = new JobPost($row['JobType'],$row['JobBudget'], $row['JobDescription'], $row['ProposalCount'], $row['FirstName'], $row['JobPostTitle'], $row['CreationDate'], $row['PostID'], $row['Status']);
                 
                     echo '<div class="col-md-6" id="postBox">';
                     echo '<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" 
-                        style="background-color: black;">';
+                    style="background-color: black;">';
                     echo '<div class="col p-4 d-flex flex-column position-static" style="color: white;">';
-                    echo '<strong class="d-inline-block mb-2 text-primary-emphasis">' .$clientName. '</strong>';
-                    echo '<h3 class="mb-0">'.$jobPostTitle .'</h3>';
+                    echo '<strong class="d-inline-block mb-2 text-primary-emphasis">' .$JobPost->getClientName(). '</strong>';
+                    echo '<h3 class="mb-0">'.$JobPost->getjobPostTitle() .'</h3>';
                             echo '<div style="color: rgb(154, 149, 149);">';
-                            echo '<span><i class="bi bi-calendar"></i>   '  .  $postDate. '</span>';
-                            echo '<span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:  ' .$numProposals.'</span>';
+                            echo '<span><i class="bi bi-calendar"></i>   '  .  $JobPost->getCreationDate() . '</span>';
+                            echo '<span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:  ' .$JobPost->getNumProposals() .'</span>';
                             echo '</div>';
-                        echo '<p class="card-text mb-auto">'.$jobDescription.'</p>';
+                        echo '<p class="card-text mb-auto">'.$JobPost->getDescription().'</p>';
                         echo '<div>'; ?>
                             <span style="float: right;">
-                            <a href="postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
+                            <a href="postDetails.php?PostID=<?php echo ($JobPost->getID()); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
                             text-decoration: none;
                             text-align: center;
                             display: inline-block;
@@ -192,7 +161,7 @@ include '../../include/DatabaseClass.php';
             
                 }
 
-                
+            
             }else{
                 echo '<div style="display:flex; justify-content:center; margin-top:80px; margin-bottom:80px;"><h2 style:"color:Black ; font-weight:800;">No result Found :(</h2></div>';
             }
@@ -202,13 +171,8 @@ include '../../include/DatabaseClass.php';
         }
     }
     }else{
-        $db = new database();
-
-        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-        jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
-        from jobposts
-        join users on users.UserID = jobposts.ClientID ");
-
+        $freelancer = new Freelancer();
+        $result = $freelancer->viewAllJobPosts();
         if($result){
             if(mysqli_num_rows($result)>0){
                 // echo post container
@@ -217,28 +181,23 @@ include '../../include/DatabaseClass.php';
 
                 while($row=mysqli_fetch_assoc($result)){
                     // echo post content
-
-                    $clientName = $row['FirstName'];
-                    $jobPostTitle = $row['JobPostTitle'];
-                    $postDate = $row['CreationDate'];
-                    $numProposals = $row['ProposalCount'];
-                    $jobDescription = $row['JobDescription'];
-                    $postID = $row['PostID'];
-                
+                    $JobPost = new JobPost($row['JobType'],$row['JobBudget'], $row['JobDescription'], $row['ProposalCount'], $row['FirstName'], $row['JobPostTitle'], $row['CreationDate'], $row['PostID'], $row['Status']);
+                    $statue = $JobPost->getStatus();
+                if($statue === 'Accept'){
                     echo '<div class="col-md-6" id="postBox">';
                     echo '<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" 
-                        style="background-color: black;">';
+                    style="background-color: black;">';
                     echo '<div class="col p-4 d-flex flex-column position-static" style="color: white;">';
-                    echo '<strong class="d-inline-block mb-2 text-primary-emphasis">' .$clientName. '</strong>';
-                    echo '<h3 class="mb-0">'.$jobPostTitle .'</h3>';
+                    echo '<strong class="d-inline-block mb-2 text-primary-emphasis">' .$JobPost->getClientName(). '</strong>';
+                    echo '<h3 class="mb-0">'.$JobPost->getjobPostTitle() .'</h3>';
                             echo '<div style="color: rgb(154, 149, 149);">';
-                            echo '<span><i class="bi bi-calendar"></i>   '  .  $postDate. '</span>';
-                            echo '<span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:  ' .$numProposals.'</span>';
+                            echo '<span><i class="bi bi-calendar"></i>   '  .  $JobPost->getCreationDate() . '</span>';
+                            echo '<span style="margin-left: 20px;"><i class="bi bi-people"></i>  Number Of Proposals:  ' .$JobPost->getNumProposals() .'</span>';
                             echo '</div>';
-                        echo '<p class="card-text mb-auto">'.$jobDescription.'</p>';
+                        echo '<p class="card-text mb-auto">'.$JobPost->getDescription().'</p>';
                         echo '<div>'; ?>
                             <span style="float: right;">
-                            <a href="postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
+                            <a href="postDetails.php?PostID=<?php echo ($JobPost->getID()); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
                             text-decoration: none;
                             text-align: center;
                             display: inline-block;
@@ -263,6 +222,7 @@ include '../../include/DatabaseClass.php';
                     </div>
                     
  <?php   }
+                }
 }
 }
     }

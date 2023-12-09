@@ -13,11 +13,11 @@ class database
 
     function __construct()
     {
-        require_once 'connect.php';
-        $this->host = $host;
-        $this->dbUser = $dbUser;
-        $this->dbPass = $dbPass;
-        $this->dbName = $dbName;
+        // require_once 'connect.php';
+        $this->host = 'localhost';
+        $this->dbUser = 'db_freelancer';
+        $this->dbPass = '';
+        $this->dbName = 'root';
         $this->conn = Singleton::getinstance();
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);

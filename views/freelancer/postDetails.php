@@ -1,8 +1,8 @@
 <?php 
-include '../../include/DatabaseClass.php'; 
-    
+    include '../../include/DatabaseClass.php'; 
+    include_once '../../models/FreelancerClass.php';
+    include_once '../../models/JobPostClass.php';
     session_start();
-
 ?> 
 
 
@@ -37,38 +37,32 @@ include '../../include/DatabaseClass.php';
     
     <link rel="stylesheet" href="../../assets/css/style2.css">
 </head>
+
 <body>
+
 <!--Header-->
     <header id="header" class="w-100 bg-black " style="position: relative; padding-left:50px;">
         <div class="container d-flex align-items-center">
-    
-        <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-    
-        <nav id="navbar" class="navbar">
+            <h1 class="logo me-auto"><a href="index.html">Dot Job</a></h1>
+            <nav id="navbar" class="navbar">
             <ul>
-            <li><a class="nav-link scrollto" href="#">Home</a></li>
-            <li><a class="nav-link scrollto active" href="posts.php">Posts</a></li>
+                <li><a class="nav-link scrollto" href="#">Home</a></li>
+                <li><a class="nav-link scrollto active" href="posts.php">Posts</a></li>
 
-            <li class="dropdown"><a href="#" style="text-decoration: none;"><span>More</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                <?php if(isset($_SESSION['username'])){ ?>
-                <li><a href="savedPosts.php" style="text-decoration:none"> Saved Posts </a></li>
-                <li><a href="#" style="text-decoration:none">Log Out</a></li>
-
-                <?php } else { ?>
-                    <li><a href="../shared/loginAndSignup.php" style="text-decoration:none"> Register </a></li>
-                    <li><a href="../shared/loginAndSignup.php" style="text-decoration:none">Log in</a></li>
+                <li class="dropdown"><a href="#" style="text-decoration: none;"><span>More</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                    <?php if(isset($_SESSION['username'])){ ?>
+                        <li><a href="savedPosts.php" style="text-decoration:none"> Saved Posts </a></li>
+                        <li><a href="#" style="text-decoration:none">Log Out</a></li>
+                    <?php } else { ?>
+                        <li><a href="../shared/loginAndSignup.php" style="text-decoration:none"> Register </a></li>
+                        <li><a href="../shared/loginAndSignup.php" style="text-decoration:none">Log in</a></li>
                     <?php } ?>
-                </ul>
-            </li>
-
-            
+                    </ul>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+            </nav><!-- .navbar -->
         </div>
     </header>
 <!-- end of header -->
@@ -76,79 +70,64 @@ include '../../include/DatabaseClass.php';
 
 <hr class="topline">
 
+
 <!-- Post details -->
+
 <?php
 
-$db = new database();
+    $freelancer = new Freelancer();
+    $post = $freelancer->postDetails();
 
-$post = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
-from jobposts
-join users on users.UserID = jobposts.ClientID  WHERE PostID =". $_GET['PostID'] );
-
-if ($post && $post->num_rows > 0) {
-    $row = $post->fetch_assoc();
+    if ($post && $post->num_rows > 0) {
+        $row = $post->fetch_assoc();
     
-    $clientName = $row['FirstName'];
-    $jobPostTitle = $row['JobPostTitle'];
-    $postDate = $row['CreationDate'];
-    $numProposals = $row['ProposalCount'];
-    $jobDescription = $row['JobDescription'];
-    $postID = $row['PostID'];
-    $jobType = $row['JobType'];
-    $budget = $row['JobBudget'];
-    $noOfProposals = $row['ProposalCount'];
-    $deadline = $row['CreationDate'];
-
-}
-echo '<div class="container" style="margin-top: 60px; margin-left: 60px;">
-    <div class="row g-5" id="postFrame">
-    <div class="col-md-8" >
-
+        $JobPost = new JobPost($row['JobType'],$row['JobBudget'], $row['JobDescription'], $row['ProposalCount'], $row['FirstName'], $row['JobPostTitle'], $row['CreationDate'], $row['PostID'], $row['Status']);
+    }
+?>
+    <div class="container" style="margin-top: 60px; margin-left: 60px;">
+        <div class="row g-5" id="postFrame">
+        <div class="col-md-8" >
         <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1">'.$jobPostTitle.'</h2>
-            <p class="blog-post-meta">'.$postDate.'<a href="#" style="text-decoration: none;"> By @'.$clientName.'</a></p>
-
-    <p>'.
-    $jobDescription
-    .'</p>
-    
+            <h2 class="display-5 link-body-emphasis mb-1"> <?php echo $JobPost->getjobPostTitle(); ?> </h2>
+            <p class="blog-post-meta"> <?php echo $JobPost->getCreationDate(); ?> <a href="#" style="text-decoration: none;"> By @ <?php echo $JobPost->getClientName(); ?></a></p>
+    <p>
+    <?php echo $JobPost->getDescription(); ?>
+    </p>
         </article>
-</div>
+    </div>
 
-<!-- job description -->
+<!-- list of job description -->
     <div class="col-md-4">
     <div class="class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 bg-body-tertiary rounded">
-        <p> <i class="fa-regular fa-clock"></i> <strong>  Job Type: </strong>'. $jobType .'</p>
-            <p> <i class="fa-solid fa-dollar-sign"></i><strong>  Budget: </strong>'.  $budget.'</i></p>
-            <p> <i class="fa-solid fa-person"></i><strong>  No of proposal: </strong>'.  $noOfProposals.'</p>
-            <p> <i class="fa-regular fa-bell"></i><strong>  Deadline: </strong>'.  $deadline.'</i></p>
+        <p> <i class="fa-regular fa-clock"></i> <strong>  Job Type: </strong><?php echo $JobPost->getJobType(); ?> </p>
+            <p> <i class="fa-solid fa-dollar-sign"></i><strong>  Budget: </strong><?php echo  $JobPost->getJobBudget(); ?></i></p>
+            <p> <i class="fa-solid fa-person"></i><strong>  No of proposal: </strong><?php echo $JobPost->getNumProposals(); ?></p>
+            <p> <i class="fa-regular fa-bell"></i><strong>  Deadline: </strong><?php echo $JobPost->getCreationDate(); ?></i></p>
         </div>
     </div>
     </div>
-<hr>
-<!-- buttons -->
+<!-- end of list of job description -->
 
+<hr>
+
+<!-- buttons -->
 <nav class="blog-pagination" aria-label="Pagination">
     <div class="postIcons" style="margin-bottom: 20px;">
         <button href="" onclick="show_pup()" name="apply-btn" ><i class="fa-solid fa-arrow-up"></i></span>  Apply</button>
-        
-
-        <form action="../../controllers/SavedButton.php" method="POST">' ?>
+        <form action="../../controllers/SavedButton.php" method="POST">
         <?php if(isset($_SESSION['username'])) { ?>
-            <?php echo '<div><input type="hidden" name="FreelancerID" value="'.$_SESSION['id'].'"></div>'; ?>
+            <div><input type="hidden" name="FreelancerID" value="<?php echo $_SESSION['id']; ?>"></div>
         <?php } else { ?>
-            <?php echo '<div><input type="hidden" name="FreelancerID" value=""></div>'; ?>
+            <div><input type="hidden" name="FreelancerID" value=""></div>
         <?php } ?>
-        <?php echo '<div><input type="hidden" name="PostID" value="'.$postID.'"></div>'; ?>
+            <div><input type="hidden" name="PostID" value="<?php echo $JobPost->getID(); ?>"></div>
         <div><input type="submit"  name="saved-btn" class="btn btn-primary" value="Save post" style="height:50px; background-color:1DA1F2"></div> 
 
-        
-</form>
-</div>
-</nav>
 
+</form>
+    </div>
+</nav>
 </div>
 
 
@@ -197,10 +176,8 @@ echo '<div class="container" style="margin-top: 60px; margin-left: 60px;">
 
 <!-- end of apply form pop up -->
 
-
-
-
 </div> <!--end of container div-->
+
 
 <!-- footer -->
     <div class="footer">

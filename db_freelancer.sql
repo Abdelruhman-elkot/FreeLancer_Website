@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 08:59 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Dec 09, 2023 at 06:38 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,7 +56,8 @@ INSERT INTO `applyform` (`Email`, `PhoneNumber`, `FreelancerSkills`) VALUES
 ('ziadadel@gmail.com', 5454545, 'ugvvvvvvvvvvvv'),
 ('farah@123.com', 1014418986, 'The most beautiful girl in the world'),
 ('farah@123.com', 1014418986, 'The most beautiful girl in the world'),
-('ziadadel@gmail.com', 1234556, 'TGGRVGTG');
+('ziadadel@gmail.com', 1234556, 'TGGRVGTG'),
+('farah@321', 124567899, 'hcyjdgfjdbvyfjfhgudhfkjhizsudfd');
 
 -- --------------------------------------------------------
 
@@ -81,10 +82,10 @@ CREATE TABLE `jobposts` (
 --
 
 INSERT INTO `jobposts` (`PostID`, `ClientID`, `JobType`, `JobBudget`, `CreationDate`, `JobDescription`, `ProposalCount`, `Status`, `JobPostTitle`) VALUES
-(1, 4, 'full time', 5000, '2023-12-03', 'UI/UX YA wlad el7lal Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto voluptates in debitis, maiores doloribus laborum nihil similique laudantium saepe dignissimos facilis assumend', 50, '', 'UI/UX'),
-(2, 5, 'half time', 3000, '2023-12-03', 'mhnds bsmgyat Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto voluptates in debitis, maiores doloribus laborum nihil similique laudantium saepe dignissimos facilis assumenda nesci', 30, '', 'Software Engineer'),
-(3, 4, 'full time ', 2000, '2023-12-03', 'software for ihgdvhvigvodshibsvdbhisvdbhiosdvibhdsvbhisvdhbljenflenvlmsnlm,\r\ngrbnbvlsmbnvnwljbfewljbjfbkaejsbf;lfksddbvmb;l\r\nsmbfw;ljkbnfl;ae\r\nkebflkbflkbelkefwb;lkefh;lewkbwe;ljkbeflkrgblgwrkbrg;lkeg', 0, '', 'SWE'),
-(4, 6, 'full time ', 1000, '2023-12-05', 'graphic designer for a company that jdhfsf;jvbdbljbssjlvbjkldvbjvbdlkjbvkjbdvljbdavbdvdjvbdlvb.dabvl.jbdaljavbd ljwqefh;lefhlwbf;fblew;kjbfljhjkhgflkwe\r\niwefhogrqihgrowihgoihgropihwropirghopwrqih\r\n', 12, '', 'Graphic designer');
+(1, 4, 'full time', 5000, '2023-12-03', 'UI/UX YA wlad el7lal Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto voluptates in debitis, maiores doloribus laborum nihil similique laudantium saepe dignissimos facilis assumend', 50, 'Accept', 'UI/UX'),
+(2, 5, 'half time', 3000, '2023-12-03', 'mhnds bsmgyat Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto voluptates in debitis, maiores doloribus laborum nihil similique laudantium saepe dignissimos facilis assumenda nesci', 30, 'Reject', 'Software Engineer'),
+(3, 4, 'full time ', 2000, '2023-12-03', 'software for ihgdvhvigvodshibsvdbhisvdbhiosdvibhdsvbhisvdhbljenflenvlmsnlm,\r\ngrbnbvlsmbnvnwljbfewljbjfbkaejsbf;lfksddbvmb;l\r\nsmbfw;ljkbnfl;ae\r\nkebflkbflkbelkefwb;lkefh;lewkbwe;ljkbeflkrgblgwrkbrg;lkeg', 0, 'Accept', 'SWE'),
+(4, 6, 'full time ', 1000, '2023-12-05', 'graphic designer for a company that jdhfsf;jvbdbljbssjlvbjkldvbjvbdlkjbvkjbdvljbdavbdvdjvbdlvb.dabvl.jbdaljavbd ljwqefh;lefhlwbf;fblew;kjbfljhjkhgflkwe\r\niwefhogrqihgrowihgoihgropihwropirghopwrqih\r\n', 12, 'Reject', 'Graphic designer');
 
 -- --------------------------------------------------------
 
@@ -117,30 +118,10 @@ CREATE TABLE `savedposts` (
 --
 
 INSERT INTO `savedposts` (`PostID`, `FreelancerId`) VALUES
-(2, 4),
-(2, 4),
-(1, 4),
-(1, 5),
-(4, 5),
-(3, 5),
-(3, 5),
-(3, 5),
-(2, 5),
-(1, 5),
-(1, 5),
-(1, 5),
-(2, 5),
-(1, 5),
-(2, 5),
-(3, 5),
-(2, 5),
-(2, 5),
-(3, 5),
-(2, 5),
-(2, 5),
-(1, 5),
-(1, 6),
-(1, 6),
+(4, 6),
+(4, 6),
+(3, 6),
+(3, 6),
 (1, 6);
 
 -- --------------------------------------------------------
