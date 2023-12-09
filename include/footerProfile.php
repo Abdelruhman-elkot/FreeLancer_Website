@@ -1,10 +1,10 @@
 <footer id="footer">
         <div class="container">
           <div class="copyright">
-            &copy; Copyright <strong><span>Freelancer</span></strong>
+            &copy; Copyright <strong><span>Dot Job</span></strong> All Rights Reserved
           </div>
           <div class="credits">
-            Designed by <a href="https://www.facebook.com">Abdelruhman_elkot</a>
+            Designed by <a href="https://www.facebook.com">Dot Job</a>
         </div>        
         </div>
       </footer>

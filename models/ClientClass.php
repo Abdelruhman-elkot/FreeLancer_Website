@@ -5,14 +5,17 @@ class Client extends User{
     
     public function __construct(){
         parent::__construct();
-    }
+    } 
     
     public function writeJobPost($jobType, $jobBudget, $description){
     
     }
 
-    public function getClientPosts(){
-        
+    public function showAllHisPosts($clientID){
+        $db = new database();
+        $sql = "SELECT * , users.FirstName FROM jobposts join users on users.UserID = jobposts.ClientID WHERE ClientID = $clientID";
+        $data = $db->conn->query($sql);
+        return $data;
     }
     
     function changePassword($userID, $newPassword) {

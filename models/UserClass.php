@@ -1,6 +1,8 @@
 <?php
 
 class User {
+
+    // Attributes
     private $ID;
     protected $firstname;
     protected $lastname;
@@ -13,8 +15,9 @@ class User {
     protected $db;
     private static $userCounter;
     
+    // Constructor
     function __construct() {
-        include_once 'C:\xampp\htdocs\SW1_Project\include/DatabaseClass.php';
+        include_once 'c:\xampp\htdocs\Testing\include\DatabaseClass.php';
         $this->db = new database();
     }
     

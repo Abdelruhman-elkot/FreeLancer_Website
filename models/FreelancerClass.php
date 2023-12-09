@@ -62,6 +62,7 @@ class Freelancer extends User{
                     jobPosts.ClientID,
                     jobPosts.PostID,
                     jobPosts.CreationDate,
+                    jobposts.Status,
                     users.FirstName
             from savedposts 
             join jobposts on jobposts.PostID = savedposts.PostID

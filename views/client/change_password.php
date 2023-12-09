@@ -11,6 +11,7 @@ require "../../include/headerProfile.php";
           <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
           <li><a href="#change_password" class="nav-link scrollto active"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
           <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
+          <li><a href="view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
         </ul>
       </nav>
     </div>

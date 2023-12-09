@@ -10,10 +10,10 @@ class Singleton
 	{
 	}
 
-	public static function getinstance()
+	public static function getinstance($host, $dbUser, $dbPass, $dbName)
 	{
 		if (@self::$uniqueinstance == null) {
-			require 'connect.php';
+			// require 'connect.php';
 			self::$uniqueinstance =  new mysqli($host, $dbUser, $dbPass, $dbName);
 		}
 		return self::$uniqueinstance;

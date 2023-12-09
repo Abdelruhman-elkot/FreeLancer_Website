@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if($_SESSION['username'] && $_SESSION['userRole'] == "Client")
+if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
 require "../../include/headerProfile.php";
 ?>
@@ -11,6 +11,7 @@ require "../../include/headerProfile.php";
             <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
             <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
             <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
+            <li><a href="view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
           </ul>
         </nav>
       </div>

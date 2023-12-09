@@ -3,6 +3,8 @@
     include_once '../../models/FreelancerClass.php';
     include_once '../../models/JobPostClass.php';
     session_start();
+    if($_SESSION['username'] && $_SESSION['userRole'] === "Freelancer")
+    {
 ?> 
 
 
@@ -13,23 +15,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Details</title>
 
-    <link href="../../assets/Templates/Arsha/assets/img/favicon.png" rel="icon">
-    <link href="../../assets/Templates/Arsha/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../../assets/imgs/wall/favicon.png" rel="icon">
+    <link href="../../assets/imgs/wall/apple-touch-icon.png" rel="apple-touch-icon">
+
     <script src="https://kit.fontawesome.com/2ce6a94813.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <link href="../../assets/Templates/Arsha/assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../assets/Templates/Arsha/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../assets/Templates/Arsha/assets/css/style.css">
-
+    
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../assets/css/style4.css">
+    
     <link rel="canonical" href="../../assets/bootstrap-5.3.2-examples/buttons">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"> -->
 
     <link rel="cononical" href="../../assets/bootstrap-5.3.2-examples/modals/">
     <link rel="stylesheet" href="../../assets/bootstrap-5.3.2-examples/modals/modals.css">
@@ -209,3 +212,10 @@
     <script src="../../assets/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php
+}
+else {
+  header("Location:../../index.php");
+}
+?>

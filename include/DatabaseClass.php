@@ -1,29 +1,31 @@
 <?php
 
-// include_once 'connect.php';
-include_once 'DatabaseConnectionSingleton.php';
 class database
 {
-
+    
+    // Attributes
     private $host;
     private $dbUser;
-    private $dbPass;
     private $dbName;
+    private $dbPass;
     public $conn;
-
+    
+    // Constructor
     function __construct()
     {
         // require_once 'connect.php';
         $this->host = 'localhost';
-        $this->dbUser = 'db_freelancer';
+        $this->dbName = 'db_freelancer';
+        $this->dbUser = 'root';
         $this->dbPass = '';
-        $this->dbName = 'root';
-        $this->conn = Singleton::getinstance();
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
+        
+        include_once 'DatabaseConnectionSingleton.php';
+        $this->conn = Singleton::getinstance($this->host, $this->dbUser, $this->dbPass, $this->dbName);
     }
+    
 
+    // Methods
+    // return number of records
     function check($sql)
     {
         if ($result = $this->conn->query($sql)) {
@@ -49,38 +51,20 @@ class database
     }
 
     // return one record only
-    // function select($sql) {
-    //     if (!$result = $this->conn->query($sql)) {
-    //         throw new Exception("can not make query :". $sql);
-    //         // return false;
-    //     }
-    //     if ($row = $result->fetch_array(MYSQLI_ASSOC))
-    //         $result->close();
-    //     return $row;
-    // }
-
     function select($sql)
     {
         if ($result = $this->conn->query($sql)) {
             if ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 $result->close();
-                return $row;
             }
+            return $row;
         } else {
             throw new Exception("Can not make query : " . $sql);
-            return false;
+            // return false;
         }
     }
 
     // update a record in a table
-    // function update($sql) {
-    //     if (!$result = $this->conn->query($sql)) {
-    //         throw new Exception("Error:can not execute the query");
-    //     } else {
-    //         return true;
-    //     }
-    // }
-
     function update($sql)
     {
         if ($this->conn->query($sql) === TRUE) {
@@ -91,42 +75,24 @@ class database
     }
 
     // insert in a table
-    // function insert($sql) {
-    //     if ($result = $this->conn->query($sql)) {
-    //         return true;
-    //     } else {
-    //         throw new Exception("Error :SQL:". $sql);
-    //         // return false;
-    //     }
-    // }
-
     function insert($sql)
     {
         if ($this->conn->query($sql) === true) {
             return true;
         } else {
             throw new Exception("Error :SQL:" . $sql);
-            return false;
+            // return false;
         }
     }
 
-    // // delete from table
-    // function delete($sql) {
-    //     if (!$result = $this->conn->query($sql)) {
-    //         throw new Exception("Error: not deleted");
-    //         // return false;
-    //     } else {
-    //         return true;
-    //     }
-    // }
-
+    // delete from table
     function delete($sql)
     {
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
             throw new Exception("Error: not deleted");
-            return false;
+            // return false;
         }
     }
 
