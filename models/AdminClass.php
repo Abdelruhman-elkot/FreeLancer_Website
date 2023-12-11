@@ -48,7 +48,7 @@ class Admin extends User
 
     public function acceptPost($postID) 
     {
-        $sql = "UPDATE jobposts SET Status = 'Accept' WHERE PostID = '$postID'";
+        $sql = "UPDATE jobposts SET Status = 'Accepted' WHERE PostID = '$postID'";
         $db = new database();
         $db->update($sql);
 
@@ -56,7 +56,7 @@ class Admin extends User
 
     public function refusePost($postID)
     {
-        $sql = "UPDATE jobposts SET Status = 'Refuse' WHERE PostID = '$postID'";
+        $sql = "UPDATE jobposts SET Status = 'Refused' WHERE PostID = '$postID'";
         $db = new database();
         $db->update($sql);
     }
