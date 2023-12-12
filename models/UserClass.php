@@ -17,7 +17,7 @@ class User {
     
     // Constructor
     function __construct() {
-        include_once 'c:\xampp\htdocs\Testing\include\DatabaseClass.php';
+        include_once '../include/DatabaseClass.php';
         $this->db = new database();
     }
     

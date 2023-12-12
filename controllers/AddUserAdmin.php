@@ -34,6 +34,6 @@ if (isset($_POST['submit'])) {
         //$admin->SendMail($email,$firstname,$username,$randompassword);
 
 
-        header("Location: ../index.php");
+        header("Location: ../views/admin/reactTable.php");
     }
 }
