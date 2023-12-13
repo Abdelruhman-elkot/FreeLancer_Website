@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2023 at 03:01 PM
+-- Generation Time: Dec 13, 2023 at 04:05 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -180,12 +180,7 @@ INSERT INTO `savedposts` (`PostID`, `FreelancerId`) VALUES
 (1, 6),
 (9, 6),
 (1, 6),
-(13, 2),
-(13, 2),
-(1, 2),
-(11, 2),
-(9, 4),
-(1, 2);
+(9, 4);
 
 -- --------------------------------------------------------
 
@@ -212,8 +207,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `ProfileImage`, `UserRole`, `Username`, `userPassword`, `About`) VALUES
 (1, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'photo_2023-03-13_04-44-24.jpg', 'Admin', 'Abdelruhman_elkot#1', '111aaa', ''),
-(2, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Freelancer', 'Abdelruhman_elkot#2', 'fFpZkBfp', ''),
-(3, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Client', 'Abdelruhman_elkot#3', 'I9LAyd1B', ''),
 (4, 'Abdelruhman', 'kot', '3bdo3lkot@gmail.com', '01143195741', 'photo_2023-03-13_04-43-52.jpg', 'Client', 'Abdelruhman_elkot#4', 'ZJhWgTeo', 'Software engineer\r\nFaculty of Computer Science and Artificial Intelligence Helwan University'),
 (5, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Client', 'Abdelruhman_elkot#5', 'GgZUh5Lj', ''),
 (6, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Client', 'Abdelruhman_elkot#6', 'aaa111', ''),
@@ -290,10 +283,16 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `jobposts`
+--
+ALTER TABLE `jobposts`
+  ADD CONSTRAINT `jobposts_ibfk_1` FOREIGN KEY (`ClientID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `proposals`
 --
 ALTER TABLE `proposals`
-  ADD CONSTRAINT `proposals_ibfk_1` FOREIGN KEY (`FreelancerID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `proposals_ibfk_1` FOREIGN KEY (`FreelancerID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `proposals_ibfk_2` FOREIGN KEY (`PostID`) REFERENCES `jobposts` (`PostID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -301,7 +300,7 @@ ALTER TABLE `proposals`
 --
 ALTER TABLE `savedposts`
   ADD CONSTRAINT `savedposts_ibfk_1` FOREIGN KEY (`PostID`) REFERENCES `jobposts` (`PostID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `savedposts_ibfk_2` FOREIGN KEY (`FreelancerId`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `savedposts_ibfk_2` FOREIGN KEY (`FreelancerId`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
