@@ -87,7 +87,6 @@ class database
     // delete from table
     function delete($sql)
     {
-        echo $sql;
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {

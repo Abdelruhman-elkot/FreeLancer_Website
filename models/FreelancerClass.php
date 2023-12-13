@@ -21,8 +21,11 @@ class Freelancer extends User{
     }
 
     public function searchForJop($search){
-        $sql = "SELECT * , users.FirstName FROM jobposts join users WHERE JobPostTitle LIKE '%$search%' OR FirstName  LIKE '%$search%' OR CreationDate LIKE '%$search%'";
-        $result = $this->db->display($sql);
+        $result = $this->db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,jobposts.Status,
+        jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName
+        from jobposts
+        join users on users.UserID = jobposts.ClientID 
+        Where JobPostTitle like '%$search%' or JobDescription like '%$search%'" );
         return $result;
     }
 
@@ -37,8 +40,8 @@ class Freelancer extends User{
         return $result;
     }
 
-    public function applyToJob($Email, $phonenumber, $skills){
-        $sql = "INSERT INTO applyform (Email, PhoneNumber, FreelancerSkills) VALUES ('$Email', '$phonenumber', '$skills')";
+    public function applyToJob($CV){
+        $sql = "INSERT INTO proposals (CV) VALUES ('$CV')";
         $this->db->insert($sql);
         return true;
     }

@@ -93,25 +93,8 @@
             <form method="post" action="../../controllers/FreelancerController.php">
 
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" name="Email">
-                    <label for="floatingInput">Email address</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control rounded-3" id="floatingPassword" placeholder="0123456789" name="PhoneNum">
-                    <label for="floatingPassword">Phone Number</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <div>
-                        <textarea
-                            rows="6"
-                            name="message"
-                            id="message"
-                            placeholder="Type your skills,work experience.... "
-                            class="formbold-form-input"
-                        ></textarea>
-                    </div>
+                    <input type="file" class="form-control rounded-3" id="floatingInput" name="CV">
+                    <label for="floatingInput">Upload CV</label>
                 </div>
                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="apply-btn">Apply Now!</button>
             </form>

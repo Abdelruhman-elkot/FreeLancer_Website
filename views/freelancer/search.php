@@ -80,7 +80,7 @@ $result = $freelancer->searchForJop($search);
         <?php
     foreach($result as $row){
             $statue = $row['Status'];
-        if($statue === 'Accept'){ ?>
+        if($statue === 'Accepted'){ ?>
         <div class="col-md-6" id="postBox">
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
                     <div class="col p-4 d-flex flex-column position-static" style="color: white;">

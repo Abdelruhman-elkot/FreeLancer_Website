@@ -1,7 +1,3 @@
-<?php
-include_once "../../include/DatabaseClass.php";
-?>
-
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
@@ -9,16 +5,12 @@ include_once "../../include/DatabaseClass.php";
 </head>
 <body>
  <?php
-        $db = new database();
-        $sql = "SELECT * FROM jobposts";
-        $data = $db->display($sql);
-        foreach($data as $line)
         $postID = $_POST['Edit_Post'];
  ?>
- <form method="POST" action="../../controllers/EditPostAdmin.php">
+ <form method="POST" action="../../controllers/AdminController.php">
     <div>
         <label for="jobTitle">Job title</label>
-            <input style="height: 20px;" type="text" name= "jobTitle" id="jobTitle"  value="<?php echo $line['JobPostTitle']?>">
+            <input style="height: 20px;" type="text" name= "jobTitle" id="jobTitle">
     </div>
     <div>
         

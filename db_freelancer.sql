@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2023 at 04:05 PM
+-- Generation Time: Dec 13, 2023 at 11:08 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -128,7 +128,7 @@ CREATE TABLE `proposals` (
   `ProposalID` int(10) NOT NULL,
   `FreelancerID` int(10) NOT NULL,
   `PostID` int(10) NOT NULL,
-  `FreelancerSkills` varchar(200) NOT NULL,
+  `CV` varchar(200) NOT NULL,
   `ProposalDate` date NOT NULL DEFAULT current_timestamp(),
   `Status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -221,8 +221,8 @@ INSERT INTO `users` (`UserID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, 
 (15, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'Abdelruhman.jpg', 'Client', 'Abdelruhman_elkot#15', 'aaa111', 'Software engineer'),
 (16, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Client', '', '0jEGjDjf', ''),
 (17, 'Abdelruhman', 'kot', '3bdo3lkot@gmail.com', '01143195741', 'Abdelruhman.jpg', 'Client', 'Abdelruhman_elkot#17', '2xeysALu', ''),
-(18, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'Abdelruhman.jpg', 'Client', 'Abdelruhman_elkot#18', 'r2dkGxKt', 'Software Engineer'),
-(20, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Admin', 'Abdelruhman_elkot#20', 'KfTBF2h5', '');
+(18, 'Abdelruhman', 'kot', '3bdo3lkot@gmail.com', '01143195741', '', 'Client', 'Abdelruhman_elkot#18', 'r2dkGxKt', 'Software Engineer'),
+(20, 'Abdelruhman', 'elkot', '3bdo3lkot@gmail.com', '01143195741', 'defaultimage.png', 'Freelancer', 'Abdelruhman_elkot#20', 'KfTBF2h5', '');
 
 --
 -- Indexes for dumped tables
@@ -270,7 +270,7 @@ ALTER TABLE `jobposts`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `ProposalID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProposalID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

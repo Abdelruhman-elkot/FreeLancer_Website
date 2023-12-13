@@ -51,28 +51,20 @@ class Admin extends User
     public function acceptPost($postID) 
     {
         $sql = "UPDATE jobposts SET Status = 'Accepted' WHERE PostID = '$postID'";
-<<<<<<< HEAD
-        $db = new database();
-        $db->update($sql);
-=======
         $this->db->update($sql);
->>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
 
     }
 
     public function refusePost($postID)
     {
         $sql = "UPDATE jobposts SET Status = 'Refused' WHERE PostID = '$postID'";
-<<<<<<< HEAD
-        $db = new database();
-        $db->update($sql);
-=======
         $this->db->update($sql);
->>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
     }
 
-    public function updateJobPost()
+    public function updateJobPost($jobTitle,$ID)
     {
+        $sql= "UPDATE jobposts SET JobPostTitle = '$jobTitle' WHERE PostID = '$ID'";
+        $this->db->update($sql);
     }
 
     public function removePost($postID)

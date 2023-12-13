@@ -52,7 +52,8 @@ class Client extends User{
     
 
     public function acceptProposal(){
-
+        $sql = "UPDATE jobposts SET propStatue = 'Accepted' WHERE UserID = '".$_SESSION['id']."'";
+        $this->db->update($sql);
     }
 
     public function refuseProposal(){

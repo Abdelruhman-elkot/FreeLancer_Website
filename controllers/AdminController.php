@@ -42,4 +42,12 @@ if(isset($_POST["Remove_Post"])){
     exit();
 }
 
+if(isset($_POST['save'])){
+    $jobTitle = $_POST['jobTitle'];
+    $ID = $_POST['save'];
+    $admin->updateJobPost($jobTitle,$ID);
+    header("Location:../views/admin/jobPostMangement.php");
+    exit();
+}
+
 ?>

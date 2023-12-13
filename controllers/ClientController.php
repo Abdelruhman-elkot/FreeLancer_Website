@@ -62,10 +62,10 @@ if (isset($_POST['save'])){
     
 
     // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-        echo "<script>alert('only JPG, JPEG & PNG files are allowed')</script>";
-        $uploadOk = 0;
-    }
+    // if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+    //     echo "<script>alert('only JPG, JPEG & PNG files are allowed')</script>";
+    //     $uploadOk = 0;
+    // }
 
     if ($uploadOk == 0) {
         echo "<script>alert('Sorry, your file was not uploaded');</script>";
