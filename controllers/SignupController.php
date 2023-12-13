@@ -1,16 +1,10 @@
 <?php
-
-include_once '../include/DatabaseClass.php';		
-$db = new database();
-include "../models/AdminClass.php";
+include 'c:\xampp\htdocs\SW1_Project\models\AdminClass.php';
 $admin = new Admin();
+$user = new User();
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup'])) {
 
-if (isset($_POST['submit'])) {
-
-    if (empty($_POST['firstname']) or empty($_POST['lastname']) or empty($_POST['email'])) {
-        echo "<script>alert(Please Check (Firstname - Lastname - Email) Fields not empty)</script>";
-        // $validate = true;
-    } else {
+    if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['userRole'])) {
 
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
@@ -18,22 +12,15 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $role = $_POST['userRole'];
 
-
-        $randompassword = $admin->generatePassword();
         // $password = password_hash($randompassword, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO users (FirstName, LastName, PhoneNumber, Email, UserRole, userPassword) VALUES ('$firstname', '$lastname', '$phonenumber', '$email', '$role', '$randompassword')";
-        $db->insert($sql);
-
-        $row = $db->getLastRecordData('users' , 'UserID');
-        $username = $firstname . "_" . $lastname . "#" . ($row['UserID']);
-
-        $sql = "UPDATE users SET Username = '$username' WHERE UserID = '".$row['UserID']."'";
-        $db->update($sql);
-
-        $admin->SendMail($email,$firstname,$username,$randompassword);
-
+        $randompassword = $admin->generatePassword();
+        $user->signUp($firstname, $lastname, $phonenumber, $email, $role, $randompassword);
+        $username = $admin->generateUsername($firstname, $lastname);
+        $admin->SendMail($email, $firstname, $username, $randompassword);
 
         header("Location: ../index.php");
+    } else {
+        echo "<script>alert(Please Check (Firstname - Lastname - Email) Fields not empty)</script>";
     }
 }
+?>

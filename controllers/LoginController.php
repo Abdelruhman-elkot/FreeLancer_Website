@@ -1,9 +1,8 @@
 <?php
-
-include '../models/UserClass.php';
+include 'c:\xampp\htdocs\SW1_Project\models\UserClass.php';
 $user = new User();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
 
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $username = $_POST['username'];
@@ -15,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             $role = $_SESSION['userRole'];
 
             if ($role === 'Admin') {
-            header("Location:../views/admin/admin_dashboard.php");
+            header("Location:../views/admin/admindashboard.php");
             } 
             
             elseif ($role === 'Client') {
@@ -28,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
         } else {
 			$param = "false";
-			header("location: ../views/shared/loginAndSignup.php?id=$param");
+			header("Location:../views/shared/loginAndSignup.php?id=$param");
         }
     }
 }

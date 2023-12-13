@@ -1,17 +1,18 @@
-<?php 
-session_start();
+<?php
+require 'c:\xampp\htdocs\SW1_Project\include\headerProfile.php';
 if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
-require "../../include/headerProfile.php";
 ?>
   
         <nav id="navbar" class="nav-menu navbar">
           <ul>
-            <li><a href="#overview" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Overview</span></a></li>
-            <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
-            <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
-            <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
-            <li><a href="view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
+            <li><a href="#overview" class="nav-link scrollto active"><i class="bx bx-home"></i><span>Overview</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i><span>Edit Profile</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Create Post</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>MY Posts</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/proposals.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Proposals</span></a></li>
+            <li><a href="<?php echo APPURL;?>/controllers/LogoutController.php" class="nav-link scrollto"><i class="bx bx-log-out"></i><span>Logout</span></a></li>
           </ul>
         </nav>
       </div>
@@ -30,13 +31,13 @@ require "../../include/headerProfile.php";
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
                 <li class="breadcrumb-item">
-                  <a class="link-body-emphasis fw-semibold text-decoration-none" href="../../index.php">
+                  <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/index.php">
                     <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
                     Home
                   </a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a class="link-body-emphasis fw-semibold text-decoration-none" href="overview.php">Profile</a>
+                  <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/views/client/overview.php">Profile</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Overview
@@ -60,7 +61,29 @@ require "../../include/headerProfile.php";
                             </div>
                           </div>
                         </div>
-                      <div class="skill-mf lead">
+                      </div>
+
+                      <div class="col-md-6">
+                      <div class="about-mf pt-4 pt-md-0">
+                        <div class="title-box-2">
+                        <div class="skill-mf lead">
+                        <div class="title-box-2" >
+                          <h5 class="title-left">
+                            About
+                          </h5>
+                        </div>
+                          <p class="lead fst-italic">
+                              <?php echo $_SESSION['about']; ?>
+                          </p>
+                        </div>
+                        </div>
+                      </div>
+                      </div>
+
+                    <div class="col-md-6">
+                      <div class="about-mf pt-4 pt-md-0">
+                        <div class="title-box-2">
+                        <div class="skill-mf lead">
                         <div class="title-box-2" >
                             <h4 class="title-left">Profile Details</h4>
                         </div>
@@ -71,20 +94,6 @@ require "../../include/headerProfile.php";
                             <p><span class="title-s">Phone: </span> <span><?php echo $_SESSION['phonenumber'];?></span></p>
                           </div>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="about-mf pt-4 pt-md-0">
-                        <div class="title-box-2">
-                          <h5 class="title-left">
-                            About
-                          </h5>
-                        </div>
-                        <p class="lead fst-italic">
-                            Software Engineer
-                        </p>
-                        <p class="lead fst-italic">
-                            Faculaty of Computer Science and Artificail Intelegence - Helwan Unversity
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -94,14 +103,10 @@ require "../../include/headerProfile.php";
           </div>
         </section>
 
-        <?php
-        include '../shared/logout.php';
-        ?>
-
     </main>
     
 <?php
-require "../../include/footerProfile.php";
+require 'c:\xampp\htdocs\SW1_Project\include\footerProfile.php';
 }
 else {
   header("Location:../../index.php");

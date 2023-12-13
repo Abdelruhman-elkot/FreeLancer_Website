@@ -1,17 +1,18 @@
 <?php 
-session_start();
-if($_SESSION['username'] && $_SESSION['userRole'] == "Client")
+require 'c:\xampp\htdocs\SW1_Project\include\headerProfile.php';
+if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
-require "../../include/headerProfile.php";
 ?>
 
       <nav id="navbar" class="nav-menu navbar">
         <ul>
-          <li><a href="overview.php" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Overview</span></a></li>
-          <li><a href="#profile_edit" class="nav-link scrollto active"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
-          <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
-          <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
-          <li><a href="view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
+          <li><a href="<?php echo APPURL;?>/views/client/overview.php" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Overview</span></a></li>
+          <li><a href="#edit_profile.php" class="nav-link scrollto active"><i class="bx bx-user"></i><span>Edit Profile</span></a></li>
+          <li><a href="<?php echo APPURL;?>/views/client/change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
+          <li><a href="<?php echo APPURL;?>/views/client/create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Create Post</span></a></li>
+          <li><a href="<?php echo APPURL;?>/views/client/view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>MY Posts</span></a></li>
+          <li><a href="<?php echo APPURL;?>/views/client/proposals.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Proposals</span></a></li>
+          <li><a href="<?php echo APPURL;?>/controllers/LogoutController.php" class="nav-link scrollto"><i class="bx bx-log-out"></i><span>Logout</span></a></li>
         </ul>
       </nav>
     </div>
@@ -30,7 +31,7 @@ require "../../include/headerProfile.php";
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
           <li class="breadcrumb-item">
-            <a class="link-body-emphasis fw-semibold text-decoration-none" href="../../index.php">
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/index.php">
               <svg class="bi" width="16" height="16">
                 <use xlink:href="#house-door-fill"></use>
               </svg>
@@ -38,7 +39,7 @@ require "../../include/headerProfile.php";
             </a>
           </li>
           <li class="breadcrumb-item">
-            <a class="link-body-emphasis fw-semibold text-decoration-none" href="overview.php">Profile</a>
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/views/client/overview.php">Profile</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Edit Profile
@@ -50,15 +51,13 @@ require "../../include/headerProfile.php";
     <section id="profile-edit" style="padding: 5px 0px;">
       <div class="container">
         <div class="box-shadow-full">
-          <form action="../../controllers/EditController.php" method="post" enctype="multipart/form-data">
+          <form action="<?php echo APPURL;?>/controllers/ClientController.php" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
               <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
               <div class="col-md-8 col-lg-9">
                 <img src="<?php echo '../../assets/imgs/' . $_SESSION['profileimage']; ?>" alt="Profile" class="img-fluid border border-secondary" style="max-width: 130px">
                 <input type="file" name="profile_picture" accept="image/*" />
                 <div class="pt-2">
-                  <!-- <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a> -->
                 </div>
               </div>
             </div>
@@ -80,10 +79,7 @@ require "../../include/headerProfile.php";
             <div class="row mb-3">
               <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
               <div class="col-md-8 col-lg-9">
-                <textarea name="about" class="form-control" id="about" style="height: 100px">
-Software Engineer
-Faculaty of Computer Science and Artificail Intelegence - Helwan Unversity 
-</textarea>
+                <textarea name="about" class="form-control" id="about" style="height: 100px"><?php echo $_SESSION['about']; ?></textarea>
               </div>
             </div>
 
@@ -101,34 +97,6 @@ Faculaty of Computer Science and Artificail Intelegence - Helwan Unversity
               </div>
             </div>
 
-            <div class="row mb-3">
-              <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com">
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="facebook" type="text" class="form-control" id="Facebook" value="https://www.facebook.com">
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="instagram" type="text" class="form-control" id="Instagram" value="https://www.instagram.com">
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://www.linkedin.com">
-              </div>
-            </div>
-
             <div class="text-center">
               <button type="submit" value="Save" name="save" class="btn btn-primary">Save</button>
             </div>
@@ -141,7 +109,7 @@ Faculaty of Computer Science and Artificail Intelegence - Helwan Unversity
   </main>
 
 <?php
-require "../../include/footerProfile.php";
+require 'c:\xampp\htdocs\SW1_Project\include\footerProfile.php';
 }
 else {
   header("Location:../../index.php");

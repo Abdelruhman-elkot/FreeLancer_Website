@@ -1,13 +1,7 @@
 <?php
-
-include_once 'UserClass.php';
-
+include_once 'c:\xampp\htdocs\SW1_Project\models\UserClass.php';
 class Freelancer extends User{
-    private static $freelancerCounter;
-
-    function getfreelancerCounter(){
-        return self::$freelancerCounter;
-    }
+    private int $freelancerCount;
 
     public function __construct(){
         parent::__construct();
@@ -15,62 +9,51 @@ class Freelancer extends User{
     }
 
     public function viewAllJobPosts(){
-        $db = new database();
-        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-        jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName, jobposts.Status
-        from jobposts
-        join users on users.UserID = jobposts.ClientID ");
-        return $result;
-    }
-
-    public function searchForJop($search){
-        $db = new database();
-        $result = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-        jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName, jobposts.Status
-        from jobposts
-        join users on users.UserID = jobposts.ClientID 
-        Where JobPostTitle like '%$search%' or JobDescription like '%$search%'   " );
+        $sql = "SELECT * , users.FirstName FROM jobposts join users on users.UserID = jobposts.ClientID";
+        $result = $this->db->display($sql);
         return $result;
     }
 
     public function postDetails() {
-        $db = new database();
-        $post = $db->conn->query("Select jobposts.PostID, jobposts.ClientID, jobposts.JobType, jobposts.JobBudget,
-            jobposts.CreationDate, jobposts.JobDescription, jobposts.ProposalCount, jobposts.JobPostTitle, users.FirstName, jobposts.Status
-        from jobposts
-        join users on users.UserID = jobposts.ClientID  WHERE PostID =". $_GET['PostID'] );
+        $sql = "SELECT * , users.FirstName FROM jobposts join users on users.UserID = jobposts.ClientID  WHERE PostID =". $_GET['PostID']."";
+        $post = $this->db->select($sql);
         return $post;
     }
 
-    public function saveJobPost($PostID, $FreeLancerId){
-        $db = new database();
-        $sql = "INSERT INTO savedposts( PostID, FreelancerId) VALUES ('$PostID', '$FreeLancerId' )";
-        $db->insert($sql);
+    public function searchForJop($search){
+        $sql = "SELECT * , users.FirstName FROM jobposts join users WHERE JobPostTitle LIKE '%$search%' OR FirstName  LIKE '%$search%' OR CreationDate LIKE '%$search%'";
+        $result = $this->db->display($sql);
+        return $result;
+    }
+
+    public function saveJobPost($PostID){
+        $sql = "INSERT INTO savedposts (PostID, FreelancerId) VALUES ('$PostID', '".$_SESSION['id']."')";
+        $this->db->insert($sql);
         return true;
+    }
+
+    public function viewSavedPosts() {
+        $result = $this->db->display("SELECT DISTINCT * , users.FirstName FROM savedposts join jobposts on jobposts.PostID = savedposts.PostID join users on users.UserID = jobposts.ClientID WHERE savedposts.FreelancerId = '".$_SESSION['id']."'");
+        return $result;
     }
 
     public function applyToJob($Email, $phonenumber, $skills){
-        $db = new database();
-        $sql = "INSERT INTO applyform ( Email, PhoneNumber, FreelancerSkills) VALUES ('$Email', '$phonenumber', '$skills')";
-        $db->insert($sql);
+        $sql = "INSERT INTO applyform (Email, PhoneNumber, FreelancerSkills) VALUES ('$Email', '$phonenumber', '$skills')";
+        $this->db->insert($sql);
         return true;
     }
 
-    public function viewSavedPosts($freeLancerId) {
-        $db = new database();
-        $result = $db->conn->query("Select DISTINCT jobposts.JobType , jobposts.JobBudget, jobposts.JobDescription,jobposts.ProposalCount,jobposts.JobPostTitle,
-                    jobPosts.ClientID,
-                    jobPosts.PostID,
-                    jobPosts.CreationDate,
-                    jobposts.Status,
-                    users.FirstName
-            from savedposts 
-            join jobposts on jobposts.PostID = savedposts.PostID
-            join users on users.UserID = jobposts.ClientID
-            WHERE savedposts.FreelancerId = $freeLancerId;" );
-        return $result;
+    public function freelancerCounter(){
+        $sql = "SELECT * FROM users";
+        $data = $this->db->display($sql);
+        $this->freelancerCount=0;
+        foreach ($data as $row){
+            if(isset($row['UserRole']) && $row['UserRole'] == 'Freelancer'){
+                $this->freelancerCount++;
+            }
+        }
+        return $this->freelancerCount;
     }
 }
-
 
 ?>

@@ -3,110 +3,33 @@
 class User {
 
     // Attributes
-    private $ID;
-    protected $firstname;
-    protected $lastname;
-    protected $phonenumber;
-    protected $email;
-    protected $profileimage;
-    protected $role;
-    private $username;
-    protected $password;
-    protected $db;
-    private static $userCounter;
+    private int $ID;
+    private string $firstname;
+    private string $lastname;
+    private string $phonenumber;
+    private string $email;
+    private string $profileimage;
+    private string $role;
+    private string $username;
+    private string $password;
+    private string $about;
+    public $db;
     
-    
-    function __construct() {
-        include_once '../include/DatabaseClass.php';
+    // Constructor
+    public function __construct() {
+        include_once 'c:\xampp\htdocs\SW1_Project\include\DatabaseClass.php';
         $this->db = new database();
     }
     
-    
-    public function userinfo($info){
-        $this->firstname = $info['firstname'];
-        $this->lastname = $info['lastname'];
-        $this->phonenumber = $info['phonenumber'];
-        $this->email = $info['email'];
-        $this->profileimage = $info['profileimage'];
-        $this->role = $info['role'];
-        $this->username = $info['username'];
-        $this->password = $info['password'];
-    }
-
-    
-    //Getter
-    function getID(){
-        return $this->ID;
-    }
-
-    function getFirstName(){
-        return $this->firstname;
-    }
-    
-    function getLastName(){
-        return $this->lastname;
-    }
-
-    function getEmail(){
-        return $this->email;
-    }
-
-    function getPhoneNumber(){
-        return $this->phonenumber;
-    }
-    
-    function getUserName(){
-        return $this->username;
-    }
-    
-    function getProfileImage(){
-        return  $this->profileimage;
-    }
-    
-    function getRole(){
-        return $this->role;
-    }
-    
-    function getPassword(){
-        return $this->password;
-    }
-    
-    function getuserCounter(){
-        return self::$userCounter;
-    }
-
-    //Setter
-    function setFirstName($firstname){
-        $this->firstname = $firstname;
-    }
-
-    function setLastName($lastname){
-        $this->lastname = $lastname;
-    }
-
-    function setEmail($email){
-        $this->email = $email;
-    }
-
-    function setPhoneNumber($phonenumber){
-        $this->phonenumber = $phonenumber;
-    }
-    
-    function setProfileImage($profileimage){
-        $this->profileimage = $profileimage;
-    }
-
-    function setRole($role){
-        $this->role = $role;
-    }
-
-    function setPassword($password){
-        $this->password = $password;
-    }
-    
     //Methods
+    // SignUp Method
+    public function signUp($firstname, $lastname, $phonenumber, $email, $role, $password){
+        $sql = "INSERT INTO users (FirstName, LastName, PhoneNumber, Email, UserRole, userPassword) VALUES ('$firstname', '$lastname', '$phonenumber', '$email', '$role', '$password')";
+        $this->db->insert($sql);
+    }
+
     // Login Method
-    function login($username , $password){
+    public function login($username , $password){
         $this->username = $username;
         $this->password = $password;
 
@@ -124,6 +47,7 @@ class User {
             $_SESSION['userRole'] = $result['UserRole'];
             $_SESSION['username'] = $result['Username'];
             $_SESSION['userpassword'] = $result['userPassword'];
+            $_SESSION['about'] = $result['About'];
             $this->db->close();
             return true;
         } else {
@@ -132,8 +56,8 @@ class User {
         }
     }
 
-    // Login Method
-    function logout(){
+    // Logout Method
+    public function logout(){
         session_start();
         unset($_SESSION['id']);
         unset($_SESSION['firstname']);
@@ -149,15 +73,5 @@ class User {
         header("Location:../index.php");
         exit();
     }
-    
-
-    public function getProfile() {
-        // Implementation for retrieving user profile
-    }
-
-    // public function changePassword() {
-    //     // Implementation for changing user password
-    // }
-    
 }
 ?>
