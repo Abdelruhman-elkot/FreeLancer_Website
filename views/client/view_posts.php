@@ -1,19 +1,21 @@
 <?php 
-    include_once '../../models/JobPostClass.php';
-    include_once '../../models/ClientClass.php';
-session_start();
+    include_once 'c:\xampp\htdocs\SW1_Project\models\ClientClass.php';
+    require 'c:\xampp\htdocs\SW1_Project\include\headerProfile.php';
+    $client = new Client();
+
 if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
-require "../../include/headerProfile.php";
 ?>
 
 <nav id="navbar" class="nav-menu navbar">
           <ul>
-            <li><a href="overview.php" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Overview</span></a></li>
-            <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
-            <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
-            <li><a href="create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
-            <li><a href="#view_posts" class="nav-link scrollto active"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/overview.php" class="nav-link scrollto"><i class="bx bx-home"></i><span>Overview</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i><span>Edit Profile</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/create_post.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Create Post</span></a></li>
+            <li><a href="#view_posts" class="nav-link scrollto active"><i class="bx bx-home"></i><span>My Post</span></a></li>
+            <li><a href="<?php echo APPURL;?>/views/client/proposals.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Proposals</span></a></li>
+            <li><a href="<?php echo APPURL;?>/controllers/LogoutController.php" class="nav-link scrollto"><i class="bx bx-log-out"></i><span>Logout</span></a></li>
           </ul>
         </nav>
       </div>
@@ -31,7 +33,7 @@ require "../../include/headerProfile.php";
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
           <li class="breadcrumb-item">
-            <a class="link-body-emphasis fw-semibold text-decoration-none" href="../../index.php">
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/index.php">
               <svg class="bi" width="16" height="16">
                 <use xlink:href="#house-door-fill"></use>
               </svg>
@@ -39,7 +41,7 @@ require "../../include/headerProfile.php";
             </a>
           </li>
           <li class="breadcrumb-item">
-            <a class="link-body-emphasis fw-semibold text-decoration-none" href="overview.php">Profile</a>
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/views/client/overview.php">Profile</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             History Posts
@@ -51,34 +53,26 @@ require "../../include/headerProfile.php";
 
 
     <section id="view_posts" style = "padding: 25px 85px;">
-    <?php 
-    $client = new Client();
-        $data = $client->showAllHisPosts($_SESSION['id']);
-        if($data){
-            if(mysqli_num_rows($data) > 0){ ?>
-
-
-                  <div class="container">
-                  <div class="box-shadow-full">
-
-                <?php while($row = mysqli_fetch_assoc($data)){
-                    $JobPost = new JobPost($row['JobType'],$row['JobBudget'], $row['JobDescription'], $row['ProposalCount'], $row['FirstName'], $row['JobPostTitle'], $row['CreationDate'], $row['PostID'], $row['Status']);?>
-                    
-                    <div class="content-area">
-                    <div class="row mb-3">
-                    <div class="col-md-10 col-lg-10" style="width: 100%;" id="postBox">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
-                    <div class="col p-4 d-flex flex-column position-static" style="color: white;">
-                    <strong class="d-inline-block mb-2 text-primary-emphasis"><?php echo $JobPost->getClientName();?> </strong>
-                    <h3 class="mb-0"><?php echo $JobPost->getjobPostTitle(); ?></h3>
-                            <div style="color: rgb(154, 149, 149);">
-                            <span><i class="bi bi-calendar"></i><?php echo $JobPost->getCreationDate();?></span>
-                            <span style="margin-left: 20px;"><i class="bi bi-people"></i><?php echo  "Number Of Proposals:" . $JobPost->getNumProposals(); ?></span>
-                            </div>
-                        <p class="card-text mb-auto"><?php echo $JobPost->getDescription();?></p>
-                        <div>
-                            <span style="float: right;">
-                            <a href="postDetails.php?PostID=<?php echo ($JobPost->getID()); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
+    <?php
+    $result = $client->showAllHisPosts();
+    ?>
+    <div class="content-area">
+        <div class="row mb-2">
+            <?php
+            foreach ($result as $row) { ?>
+                    <div class="col-md-6" id="postBox">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
+                            <div class="col p-4 d-flex flex-column position-static" style="color: white;">
+                                <strong class="d-inline-block mb-2 text-primary-emphasis"><?php echo $row['FirstName']; ?></strong>
+                                <h3 class="mb-0"><?php echo $row['JobPostTitle']; ?></h3>
+                                <div style="color: rgb(154, 149, 149);">
+                                    <span><i class="bi bi-calendar"></i><?php echo $row['CreationDate']; ?></span>
+                                    <span style="margin-left: 20px;"><i class="bi bi-people"></i><?php echo "Number Of Proposals:" . $row['ProposalCount']; ?></span>
+                                </div>
+                                <p class="card-text mb-auto"><?php echo $row['JobDescription']; ?></p>
+                                <div>
+                                    <span style="float: right;">
+                                        <a href="<?php echo APPURL; ?>/views/freelancer/postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
                             text-decoration: none;
                             text-align: center;
                             display: inline-block;
@@ -91,30 +85,25 @@ require "../../include/headerProfile.php";
                             font-weight: 700px;
                             width: 150px;
                             margin-top: 15px;
-                            " 
-                            id="btn-send" onclick="show_pup()">
-                            View Details  <i class="bi bi-arrow-right-circle"></i>
-                            </a>
-                            </span>
- 
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                    
- <?php   }
-}
-}
+                            " id="btn-send" onclick="show_pup()">
+                                            View Details <i class="bi bi-arrow-right-circle"></i>
+                                        </a>
+                                    </span>
 
-    
-?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                }
+            ?>
+        </div>
+    </div>
     </main>
 
 
 <?php
-require "../../include/footerProfile.php";
+require 'c:\xampp\htdocs\SW1_Project\include\footerProfile.php';
 }
 else {
   header("Location:../../index.php");

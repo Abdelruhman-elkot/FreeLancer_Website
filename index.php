@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-  
-    <!-- Google Fonts -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
-
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    
-    <link href="assets/css/style3.css" rel="stylesheet">
-
-</head>
+<?php
+require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
+?>
 <body>
-      <section id="hero">
+  <!------ Slide Show ------->
+  <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
@@ -29,39 +12,63 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(assets/imgs/slide/slide-1.jpg);">
+          <div class="carousel-item active" style="background-image: url(<?php echo APPURL;?>/assets/imgs/slide/slide-1.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h1 class="animate__animated animate__fadeInDown">Welcome To <span class="typed" data-typed-items="DOT JOB"></span></h1>
                 <h2 class="animate__animated animate__fadeInUp">Start Your Career Now With Good Jobs</h2>
                 <div>
-                  <a href="#" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Started</a>
+                <?php if(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Client') : ?>
+                  <a href="<?php echo APPURL;?>/views/client/overview.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Freelancer'): ?>
+                  <a href="<?php echo APPURL;?>/views/freelancer/savedPosts.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Saved Posts</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Admin'): ?>
+                  <a href="<?php echo APPURL;?>/views/admin/admindashboard.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                  <?php else : ?>
+                    <a href="<?php echo APPURL;?>/views/shared/loginAndSignup.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Start</a>
+                <?php endif;?>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(assets/imgs/slide/slide-2.jpg);">
+          <div class="carousel-item" style="background-image: url(<?php echo APPURL;?>/assets/imgs/slide/slide-2.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h1 class="animate__animated animate__fadeInDown">Welcome To <span class="typed" data-typed-items="DOT JOB"></span></h1>
                 <h2 class="animate__animated animate__fadeInUp">Start Your Career Now With Good Jobs</h2>
                 <div>
-                  <a href="#" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Started</a>
+                <?php if(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Client') : ?>
+                  <a href="<?php echo APPURL;?>/views/client/overview.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Freelancer'): ?>
+                  <a href="<?php echo APPURL;?>/views/freelancer/savedPosts.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Saved Posts</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Admin'): ?>
+                  <a href="<?php echo APPURL;?>/views/admin/admindashboard.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                  <?php else : ?>
+                    <a href="<?php echo APPURL;?>/views/shared/loginAndSignup.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Start</a>
+                <?php endif;?>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(assets/imgs/slide/slide-3.jpg);">
+          <div class="carousel-item" style="background-image: url(<?php echo APPURL;?>/assets/imgs/slide/slide-3.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h1 class="animate__animated animate__fadeInDown">Welcome To <span class="typed" data-typed-items="DOT JOB"></span></h1>
                 <h2 class="animate__animated animate__fadeInUp">Start Your Career Now With Good Jobs</h2>
                 <div>
-                  <a href="#" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Started</a>
+                <?php if(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Client') : ?>
+                  <a href="<?php echo APPURL;?>/views/client/overview.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Freelancer'): ?>
+                  <a href="<?php echo APPURL;?>/views/freelancer/savedPosts.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Saved Posts</a>
+                <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Admin'): ?>
+                  <a href="<?php echo APPURL;?>/views/admin/admindashboard.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
+                  <?php else : ?>
+                    <a href="<?php echo APPURL;?>/views/shared/loginAndSignup.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Start</a>
+                <?php endif;?>
                 </div>
               </div>
             </div>
@@ -79,121 +86,382 @@
 
       </div>
     </div>
-  </section><!-- End Hero -->
+  </section>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
-      <div class="container d-flex align-items-center justify-content-between">
-  
-        <a href="index.php" class="logo mr-auto"><img src="assets/imgs/photo_2023-12-02_20-54-18.jpg" alt=""></a>
-        <!-- Uncomment below if you prefer to use a text logo -->
-        <!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
-  
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto" href="#services">Services</a></li>
-            <li><a class="nav-link scrollto " href="views/client/overview.php">Profile</a></li>
-            <li><a class="nav-link scrollto" href="#testimonials">Posts</a></li>
-            <li><a class="nav-link scrollto" href="views/shared/loginAndSignup.php">Login</a></li>
-            <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-  
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <a href="<?php echo APPURL;?>/index.php" class="logo mr-auto"><img src="<?php echo APPURL;?>/assets/imgs/logo/slogo.jpg" alt="logo"></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto " href="<?php echo APPURL;?>/views/freelancer/posts.php">Posts</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <?php if(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Client') : ?>
+            <li><a class="nav-link scrollto" href="<?php echo APPURL;?>/views/client/overview.php">Dashboard</a></li>
+          <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Freelancer'): ?>
+            <li><a class="nav-link scrollto" href="<?php echo APPURL;?>/views/freelancer/savedPosts.php">Saved Posts</a></li>
+          <?php elseif(isset($_SESSION['username']) && $_SESSION['userRole'] === 'Admin'): ?>
+            <li><a class="nav-link scrollto" href="<?php echo APPURL;?>/views/admin/admindashboard.php">Dashboard</a></li>
+          <?php else : ?>
+            <li><a class="nav-link scrollto" href="<?php echo APPURL;?>/views/shared/loginAndSignup.php">Login/Register</a></li>
+          <?php endif;?>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main>
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>About Us</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <a href="#" class="btn-learn-more">Learn More</a>
+          </div>
+        </div>
+
       </div>
-    </header><!-- End Header -->
+    </section><!-- End About Us Section -->
 
-    <main>
-
-        <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
-          <div class="container">
-    
-            <div class="section-title" data-aos="fade-up">
-              <h2>Contact</h2>
+    <!-- ======= Counter Section ======= -->
+    <div class="section-counter paralax-mf bg-image" style="background-image: url(assets/imgs/home/counters-bg.jpg)">
+      <div class="overlay-mf"></div>
+      <div class="container position-relative">
+        <div class="row">
+          <div class="col-sm-3 col-lg-3">
+            <div class="counter-box counter-box pt-4 pt-md-0">
+              <div class="counter-ico">
+                <span class="ico-circle"><i class="bi bi-check"></i></span>
+              </div>
+              <div class="counter-num">
+                <p data-purecounter-start="0" data-purecounter-end="450" data-purecounter-duration="1" class="counter purecounter"></p>
+                <span class="counter-text">WORKS COMPLETED</span>
+              </div>
             </div>
-    
-            <div class="row">
-    
-              <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="info">
-                  <div>
-                    <div class="address">
-                      <i class="bi bi-geo-alt"></i>
-                      <h4>Location:</h4>
-                      <p>A108 Adam Street, New York, NY 535022</p>
-                    </div>
-                  </div>
-    
+          </div>
+          <div class="col-sm-3 col-lg-3">
+            <div class="counter-box pt-4 pt-md-0">
+              <div class="counter-ico">
+                <span class="ico-circle"><i class="bi bi-journal-richtext"></i></span>
+              </div>
+              <div class="counter-num">
+                <p data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="counter purecounter"></p>
+                <span class="counter-text">YEARS OF EXPERIENCE</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-lg-3">
+            <div class="counter-box pt-4 pt-md-0">
+              <div class="counter-ico">
+                <span class="ico-circle"><i class="bi bi-people"></i></span>
+              </div>
+              <div class="counter-num">
+                <p data-purecounter-start="0" data-purecounter-end="550" data-purecounter-duration="1" class="counter purecounter"></p>
+                <span class="counter-text">TOTAL CLIENTS</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-lg-3">
+            <div class="counter-box pt-4 pt-md-0">
+              <div class="counter-ico">
+                <span class="ico-circle"><i class="bi bi-award"></i></span>
+              </div>
+              <div class="counter-num">
+                <p data-purecounter-start="0" data-purecounter-end="48" data-purecounter-duration="1" class="counter purecounter"></p>
+                <span class="counter-text">AWARD WON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Counter Section -->
 
-                  <div class="email mt-4">
-                    <i class="bi bi-envelope"></i>
-                    <h4>Email:</h4>
-                    <p><a href="mailto:info@example.com" style="color: #43857a;">info@example.com</a></p>
-                  </div>
-    
-                  <div class="phone mt-4">
-                    <i class="bi bi-phone"></i>
-                    <h4>Call:</h4>
-                    <p><a href="tel:+155895548855" style="color: #43857a;">+1 5589 55488 55</a></p>
-                  </div>
-    
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-briefcase"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-card-checklist"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Dolor Sitema</a></h4>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-bar-chart"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Sed ut perspiciatis</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-binoculars"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Magni Dolores</a></h4>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-brightness-high"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Nemo Enim</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+            <h4 class="title"><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Eiusmod Tempor</a></h4>
+            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <?php $sql = "SELECT *, FirstName FROM jobposts join users on users.UserID = jobposts.ClientID WHERE Status = 'Accepted' ORDER BY PostID  DESC LIMIT 6";
+        $result = $db->display($sql);
+        ?>
+        <div class="content-area">
+        <div class="row mb-2">
+            <?php
+        foreach($result as $row){
+                $statue = $row['Status'];
+            if($statue === 'Accepted'){ ?>
+                <div class="col-md-6" id="postBox">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
+                <div class="col p-4 d-flex flex-column position-static" style="color: white;">
+                <strong class="d-inline-block mb-2 text-primary-emphasis"><?php echo $row['FirstName'];?></strong>
+                <h3 class="mb-0"><?php echo $row['JobPostTitle'];?></h3>
+                        <div style="color: rgb(154, 149, 149);">
+                        <span><i class="bi bi-calendar"></i><?php echo $row['CreationDate'];?></span>
+                        <span style="margin-left: 20px;"><i class="bi bi-people"></i><?php echo "Number Of Proposals:" . $row['ProposalCount'];?></span>
+                        </div>
+                    <p class="card-text mb-auto"><?php echo $row['JobDescription'];?></p>
+                    <div>
+                        <span style="float: right;">
+                        <a href="<?php echo APPURL;?>/views/freelancer/postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
+                        text-decoration: none;
+                        text-align: center;
+                        display: inline-block;
+                        font-size: 16px;
+                        color: white; 
+                        background-color: #1DA1F2;
+                        border-radius: 12px;
+                        padding: 8px;
+                        margin: 4px 2px;
+                        font-weight: 700px;
+                        width: 150px;
+                        margin-top: 15px;
+                        " 
+                        id="btn-send" onclick="show_pup()">
+                        View Details  <i class="bi bi-arrow-right-circle"></i>
+                        </a>
+                        </span>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            }
+        }
+        ?>
+</div>
+</div>
+
+<!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up">
+            <div class="member">
+              <img src="assets/imgs/team/Abdelruhman.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Walter White</h4>
+                  <span>Chief Executive Officer</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <img src="assets/imgs/team/Amir.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Sarah Jhonson</h4>
+                  <span>Product Manager</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <img src="assets/imgs/team/Subway.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>William Anderson</h4>
+                  <span>CTO</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <img src="assets/imgs/team/Ziad.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Amanda Jepson</h4>
+                  <span>Accountant</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Contact</h2>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="info">
+              <div>
+                <div class="address">
+                  <i class="ri-map-pin-line"></i>
+                  <h4>Location:</h4>
+                  <p>A108 Adam Street, New York, NY 535022</p>
                 </div>
               </div>
 
-    
-              <div class="col-lg-7 col-md-12" data-aos="fade-up" data-aos-delay="300">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="col-md-6 form-group mt-3 mt-md-0">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                    </div>
-                  </div>
-                  <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                  </div>
-                  <div class="form-group mt-3">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                  </div>
-                  <div class="my-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-                  </div>
-                  <div class="text-center"><button type="submit">Send Message</button></div>
-                </form>
-              </div>
-    
-            </div>
-    
-          </div>
-        </section><!-- End Contact Section -->
-    
-      </main>
 
-        <!-- ======= Footer ======= -->
+              <div class="email mt-4">
+                <i class="ri-mail-send-line"></i>
+                <h4>Email:</h4>
+                <p><a href="mailto:info@example.com" style="color: #000000;">info@example.com</a></p>
+              </div>
+
+              <div class="phone mt-4">
+                <i class="ri-phone-line"></i>
+                <h4>Call:</h4>
+                <p><a href="tel:+155895548855" style="color: #000000;">01134455667</a></p>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-lg-7 col-md-12" data-aos="fade-up" data-aos-delay="300">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main>
+
+  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
       <div class="container">
@@ -205,8 +473,8 @@
               <p>
                 A108 Adam Street <br>
                 NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                <strong>Phone:</strong>01134455667<br>
+                <strong>Email:</strong>info@example.com<br>
               </p>
               <div class="social-links mt-3">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -221,71 +489,33 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#team">Team</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i><a href="<?php echo APPURL;?>/views/freelancer/posts.php">Graphic Design</a></li>
             </ul>
           </div>
 
-          <!-- <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
-          </div> -->
+          <div class="col-lg-2 col-md-2 footer-newsletter">
+            <img src="assets/imgs/logo/logo.jpg" alt="Logo" style="position: relative; width: 350px; height: 250px;" />
+          </div>
 
         </div>
       </div>
     </div>
 
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Dot Jobs</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/" style="color: #1bac91; text-decoration: none;">Dot Job</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main3.js"></script>
-</body>
-</html>
+<?php
+require 'c:\xampp\htdocs\SW1_Project\include\footerhome.php';
+?>

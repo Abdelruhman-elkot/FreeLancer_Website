@@ -1,17 +1,18 @@
 <?php 
-session_start();
+require 'c:\xampp\htdocs\SW1_Project\include\headerProfile.php';
 if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
-require "../../include/headerProfile.php";
 ?>
 
 <nav id="navbar" class="nav-menu navbar">
     <ul>
-        <li><a href="overview.php" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Overview</span></a></li>
-        <li><a href="edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
-        <li><a href="change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
+        <li><a href="<?php echo APPURL;?>/views/client/overview.php" class="nav-link scrollto"><i class="bx bx-home"></i><span>Overview</span></a></li>
+        <li><a href="<?php echo APPURL;?>/views/client/edit_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Edit Profile</span></a></li>
+        <li><a href="<?php echo APPURL;?>/views/client/change_password.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Change Password</span></a></li>
         <li><a href="#create_post" class="nav-link scrollto active"><i class="bx bx-file-blank"></i> <span>Create Post</span></a></li>
-        <li><a href="view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>MY Posts</span></a></li>
+        <li><a href="<?php echo APPURL;?>/views/client/view_posts.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>MY Posts</span></a></li>
+        <li><a href="<?php echo APPURL;?>/views/client/proposals.php" class="nav-link scrollto"><i class="bx bx-file-blank"></i><span>Proposals</span></a></li>
+        <li><a href="<?php echo APPURL;?>/controllers/LogoutController.php" class="nav-link scrollto"><i class="bx bx-log-out"></i><span>Logout</span></a></li>
     </ul>
 </nav>
 </div>
@@ -30,7 +31,7 @@ require "../../include/headerProfile.php";
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="../../index.php">
+                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/index.php">
                         <svg class="bi" width="16" height="16">
                             <use xlink:href="#house-door-fill"></use>
                         </svg>
@@ -38,7 +39,7 @@ require "../../include/headerProfile.php";
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="overview.php">Profile</a>
+                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="<?php echo APPURL;?>/views/client/overview.php">Profile</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Create Post</li>
             </ol>
@@ -49,7 +50,7 @@ require "../../include/headerProfile.php";
         <div class="container">
             <div class="box-shadow-full">
 
-                <form action="../../controllers/CreatePostController.php" method="post">
+                <form action="<?php echo APPURL;?>/controllers/ClientController.php" method="post">
 
                     <div class="row mb-3">
                         <label for="jobTitle" class="col-md-4 col-lg-3 col-form-label">Job Title:</label>
@@ -63,8 +64,8 @@ require "../../include/headerProfile.php";
                         <div class="col-md-6 col-lg-6">
                             <select id="jobType" class="form-control" name="jobType" required="">
                                 <option value=""></option>
-                                <option value="fixed">Full Time</option>
-                                <option value="hourly">Half Time</option>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
                             </select>
                         </div>
                     </div>
@@ -84,7 +85,7 @@ require "../../include/headerProfile.php";
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary" name="create">Submit Post</button>
+                        <button type="submit" class="btn btn-primary" name="create" value="create">Create Post</button>
                     </div>
                 </form>
             </div>
@@ -98,7 +99,7 @@ require "../../include/headerProfile.php";
 
 
 <?php
-require "../../include/footerProfile.php";
+require 'c:\xampp\htdocs\SW1_Project\include\footerProfile.php';
 }
 else {
   header("Location:../../index.php");

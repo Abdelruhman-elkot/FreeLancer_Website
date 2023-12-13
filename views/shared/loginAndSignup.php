@@ -1,5 +1,6 @@
 <?php
-include 'modals.php';
+    include 'c:\xampp\htdocs\SW1_Project\views\shared\modals.php';
+    define("APPURL", "http://localhost/SW1_Project");
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include 'modals.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
-        <link rel="stylesheet" href="../../assets/css/master.css">
+        <link rel="stylesheet" href="<?php echo APPURL;?>/assets/css/master.css">
 
         <title>Sign</title>
     </head>
@@ -22,7 +23,7 @@ include 'modals.php';
 
             <!----- SignUp Form ------>
             <div class="form-container signup-container">
-                <form method="post" action="../../controllers/SignupController.php">
+                <form method="post" action="<?php echo APPURL;?>/controllers/SignupController.php">
                     <h1>Sign Up Here.</h1>
                     <input type="text" placeholder="First name" name="firstname" required />
                     <input type="text" placeholder="Last name" name="lastname" required />
@@ -35,18 +36,18 @@ include 'modals.php';
                         <label for="freelancer">
                             <input type="radio" name="userRole" value="Freelancer" id="freelancer" style="max-width: min-content;" />Freelancer</label>
                     </div>
-                    <button type="submit" name="submit">Sign Up</button>
+                    <button type="submit" name="signup">Sign Up</button>
                 </form>
             </div>
 
 
             <!------ Login Form ----->
             <div class="form-container login-container">
-                <form method="post" action="../../controllers/LoginController.php">
+                <form method="post" action="<?php echo APPURL;?>/controllers/LoginController.php">
                     <h1>Login Here</h1>
                     <input type="text" placeholder="Username" name="username" required />
                     <input type="password" placeholder="Password" name="password" required />
-                    <button type="submit" name="submit">Login</button>
+                    <button type="submit" name="login">Login</button>
                 </form>
             </div>
 
@@ -70,7 +71,7 @@ include 'modals.php';
         </div>
 
 
-        <script src="../../assets/js/script.js"></script>
+        <script src="<?php echo APPURL;?>/assets/js/script.js"></script>
     </body>
 
 </html>

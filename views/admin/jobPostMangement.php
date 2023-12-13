@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +52,15 @@
     </nav>
 
     <section class="overlay"></section>
+=======
+<?php
+session_start();
+include 'c:\xampp\htdocs\SW1_Project\include\headeradmin.php';
+if($_SESSION['username'] && $_SESSION['userRole'] === "Admin")
+{
+?>
+<section class="overlay"></section>
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
 
     <div class="fresh-table full-color-blue">
 
@@ -69,6 +79,7 @@
           <th>Actions</th>
         </thead>
         <tbody>
+<<<<<<< HEAD
           <?php
           
           include_once '../../include/DatabaseClass.php';
@@ -94,25 +105,40 @@
             }
           }
         ?>
+=======
+
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
         <div style="display: flex; flex-direction :row ; justify-content: space-evenly;">
           <div style="position: relative;">
             <?php
             echo "Accepted posts";
+<<<<<<< HEAD
             echo $acceptedCount;
+=======
+            echo $post->acceptedCounter();
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
         
             ?>
           </div>
           <div style="position: relative;">
             <?php
             echo "Refused posts";
+<<<<<<< HEAD
             echo $refusedCount;
+=======
+            echo $post->refuesedCounter();
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
         
             ?>
           </div>
           <div style="position: relative;">
             <?php
             echo "Pending posts";
+<<<<<<< HEAD
             echo $pendingCount;
+=======
+            echo $post->pendingCounter();
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
         
             ?>
           </div>
@@ -120,7 +146,11 @@
             <?php
 
           
+<<<<<<< HEAD
 
+=======
+          $data = $admin->displayPosts();
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
           foreach ($data as $row) {
             if ($row['Status'] === 'Accepted'){
             echo '<tr>';
@@ -135,12 +165,20 @@
           
             ?>
                   <td>
+<<<<<<< HEAD
                       <form action="../../views/admin/EditData.php" method="POST">
+=======
+                      <form action="<?php echo APPURL ?>/views/admin/EditData.php" method="POST">
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                          <button type="submit" name="Edit_Post" value="<?=$row['PostID']?>" class="btm btn-danger">Edit</button>
                       </form>
                   </td>
                   <td>
+<<<<<<< HEAD
                       <form action="../../controllers/RemovePostAdmin.php" method="POST">
+=======
+                      <form action="<?php echo APPURL ?>/controllers/RemovePostAdmin.php" method="POST">
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                          <button type="submit" name="Remove_Post" value="<?=$row['PostID']  ?>" class="btm btn-danger">Remove</button>
                       </form>
                   </td> 
@@ -164,7 +202,11 @@
                 echo '<td>' . $row['JobPostTitle']   . '</td>';
                 ?>
                         <td>
+<<<<<<< HEAD
                             <form action="../../controllers/RemovePostAdmin.php" method="POST">
+=======
+                            <form action="<?php echo APPURL ?>/controllers/RemovePostAdmin.php" method="POST">
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                                 <button type="submit" name="Remove_Post" value="<?=$row['PostID']  ?>" class="btm btn-danger">Remove</button>
                             </form>
                         </td>
@@ -198,10 +240,14 @@
                 </thead>
                 <tbody>
                   <?php
+<<<<<<< HEAD
                   include_once '../../include/DatabaseClass.php';
                   $db = new database();
                   $sql = "SELECT * FROM jobposts";
                   $data = $db->display($sql);
+=======
+                $data = $admin->displayPosts();
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                   foreach ($data as $row) {
                     if( $row['Status'] === 'Pending'){
 
@@ -213,17 +259,26 @@
                             echo '<td>' . $row['JobType']        . '</td>';
                             ?>
                         <td>
+<<<<<<< HEAD
                             <form action="../../controllers/AcceptPostAdmin.php" method="POST" style=" flex: 2px;">
+=======
+                            <form action="<?php echo APPURL ?>/controllers/AcceptPostAdmin.php" method="POST" style=" flex: 2px;">
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                                 <button type="submit" name="Accept_Post" value="<?=$row['PostID']  ?>" class="btm btn-danger">Accept</button>
                             </form>
                         </td>
                         <td>
+<<<<<<< HEAD
                             <form action="../../controllers/RefusePostAdmin.php" method="POST">
+=======
+                            <form action="<?php echo APPURL ?>/controllers/RefusePostAdmin.php" method="POST">
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                                 <button type="submit" name="Refuse_Post" value="<?=$row['PostID']  ?>" class="btm btn-danger">Refuse</button>
                             </form>
                         </td>
                         <?php
                         }
+<<<<<<< HEAD
                         ?>
 
                     
@@ -231,6 +286,8 @@
                 <?php
                 
                     
+=======
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b
                   }
                   ?>
 
@@ -240,6 +297,7 @@
          </div>
 </div>        
      
+<<<<<<< HEAD
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -279,3 +337,12 @@
 </body>
 
 </html>
+=======
+<?php
+include 'c:\xampp\htdocs\SW1_Project\include\footeradmin.php';
+}
+else {
+  header("Location:../../index.php");
+}
+?>
+>>>>>>> 2bd5c91b28226a43e669f2e600b2b9d8b063ee3b

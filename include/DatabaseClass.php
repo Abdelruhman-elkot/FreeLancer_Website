@@ -13,13 +13,12 @@ class database
     // Constructor
     function __construct()
     {
-        // require_once 'connect.php';
         $this->host = 'localhost';
         $this->dbName = 'db_freelancer';
         $this->dbUser = 'root';
         $this->dbPass = '';
         
-        include_once 'DatabaseConnectionSingleton.php';
+        include_once 'c:\xampp\htdocs\SW1_Project\include\DatabaseConnectionSingleton.php';
         $this->conn = Singleton::getinstance($this->host, $this->dbUser, $this->dbPass, $this->dbName);
     }
     
@@ -88,6 +87,7 @@ class database
     // delete from table
     function delete($sql)
     {
+        echo $sql;
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {
