@@ -61,6 +61,8 @@
 <hr>
 
 <!-- buttons -->
+<?php 
+if(!isset($_SESSION['id']) || $_SESSION['userRole'] === "Freelancer") { ?>
 <nav class="blog-pagination" aria-label="Pagination">
     <div class="postIcons" style="margin-bottom: 20px;">
         <button onclick="show_pup()" name="apply-btn"><i class="fa-solid fa-arrow-up"></i></span>Apply</button>
@@ -75,7 +77,7 @@
     </form>
     </div>
 </nav>
-
+<?php } ?>
 </div>
 
 

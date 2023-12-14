@@ -29,8 +29,8 @@ class Freelancer extends User{
         return $result;
     }
 
-    public function saveJobPost($PostID){
-        $sql = "INSERT INTO savedposts (PostID, FreelancerId) VALUES ('$PostID', '".$_SESSION['id']."')";
+    public function saveJobPost($PostID, $freelancerId){
+        $sql = "INSERT INTO savedposts (PostID, FreelancerId) VALUES ('$PostID', '$freelancerId')";
         $this->db->insert($sql);
         return true;
     }
