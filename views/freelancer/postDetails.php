@@ -61,6 +61,8 @@
 <hr>
 
 <!-- buttons -->
+<?php 
+if(!isset($_SESSION['id']) || $_SESSION['userRole'] === "Freelancer") { ?>
 <nav class="blog-pagination" aria-label="Pagination">
     <div class="postIcons" style="margin-bottom: 20px;">
         <button onclick="show_pup()" name="apply-btn"><i class="fa-solid fa-arrow-up"></i></span>Apply</button>
@@ -76,6 +78,8 @@
     </div>
 </nav>
 
+<?php }?>
+
 </div>
 
 
@@ -90,12 +94,13 @@
             </div>
 
             <div class="modal-body p-5 pt-0">
-            <form method="post" action="../../controllers/FreelancerController.php">
+            <form method="post" action="../../controllers/FreelancerController.php" enctype="multipart/form-data">
 
                 <div class="form-floating mb-3">
-                    <input type="file" class="form-control rounded-3" id="floatingInput" name="CV">
+                    Select CV File: <input type="file" class="form-control rounded-3" id="floatingInput" name="CV">
                     <label for="floatingInput">Upload CV</label>
                 </div>
+                <div><input type="hidden" name="PostID" value="<?php echo $post['PostID'];?>"></div>
                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="apply-btn">Apply Now!</button>
             </form>
             </div>

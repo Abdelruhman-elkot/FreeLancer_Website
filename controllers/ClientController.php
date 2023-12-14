@@ -62,10 +62,10 @@ if (isset($_POST['save'])){
     
 
     // Allow certain file formats
-    // if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-    //     echo "<script>alert('only JPG, JPEG & PNG files are allowed')</script>";
-    //     $uploadOk = 0;
-    // }
+    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+        echo "<script>alert('only JPG, JPEG & PNG files are allowed')</script>";
+        $uploadOk = 0;
+    }
 
     if ($uploadOk == 0) {
         echo "<script>alert('Sorry, your file was not uploaded');</script>";
@@ -91,5 +91,22 @@ if (isset($_POST['create']) && $_SESSION['id']) {
         header('Location: ../views/client/view_posts.php');
     }
 }
+
+// Controller of Accept Proposal
+
+if (isset($_POST['accept_prop']) && $_SESSION['id']) {
+    $proposalID = $_POST['accept_prop'];
+    $client->acceptProposal($proposalID);
+    header('Location:../views/client/proposals.php');
+}
+
+// Controller of Refuse Proposal
+
+if (isset($_POST['refuse_prop']) && $_SESSION['id']) {
+    $proposalID = $_POST['refuse_prop'];
+    $client->refuseProposal($proposalID);
+    header('Location:../views/client/proposals.php');
+}
+
 
 ?>

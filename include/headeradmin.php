@@ -55,6 +55,12 @@ define("APPURL", "http://localhost/SW1_Project");
                 <span class="link">Post mangement</span>
               </a>
             </li>
+            <li class="list">
+              <a href="<?php echo APPURL;?>/controllers/LogoutController.php" class="nav-link">
+              <i class="bx bx-log-out icon"></i>
+              <span class="link">Logout</span>
+            </a>
+          </li>
           </div>
         </div>
 

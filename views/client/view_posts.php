@@ -59,6 +59,7 @@ if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
     <div class="content-area">
         <div class="row mb-2">
             <?php
+            if(!empty($result)){
             foreach ($result as $row) { ?>
                     <div class="col-md-6" id="postBox">
                         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
@@ -96,6 +97,7 @@ if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
                     </div>
             <?php
                 }
+              }
             ?>
         </div>
     </div>

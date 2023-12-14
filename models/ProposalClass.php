@@ -15,7 +15,7 @@ class Proposal {
 
 
     public function showProposals(){
-        $sql = "SELECT * , users.FirstName , jobposts.JobPostTitle FROM proposals join users on users.UserID = proposals.FreelancerID join jobposts on jobposts.PostID = proposals.PostID WHERE ClientID = '".$_SESSION['id']."'";
+        $sql = "SELECT *, jobposts.ClientID FROM proposals join jobposts on jobposts.PostID = proposals.PostID WHERE ClientID = '$_SESSION[id]'";
         $data = $this->db->display($sql);
         return $data;
     }

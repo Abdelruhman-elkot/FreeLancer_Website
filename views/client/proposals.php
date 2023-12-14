@@ -1,5 +1,7 @@
 <?php
 require 'c:\xampp\htdocs\SW1_Project\include\headerProfile.php';
+include_once 'c:\xampp\htdocs\SW1_Project\models\ProposalClass.php';
+$prop = new Proposal();
 if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
 {
 ?>
@@ -44,6 +46,64 @@ if($_SESSION['username'] && $_SESSION['userRole'] === "Client")
               </ol>
             </nav>
           </div>
+
+          <section id="proposals" style = "padding: 25px 85px;">
+            <?php
+              $result = $prop->showProposals();
+            ?>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title mb-4 d-inline">Proposals</h5>
+
+                    <table class="table mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">FreelancerID</th>
+                          <th scope="col">Post</th>
+                          <th scope="col">CV</th>
+                          <th scope="col">ProposalDate</th>
+                          <th scope="col"></th>
+                          <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        if(!empty($result)){
+                         foreach($result as $row) : ?>
+                          <tr>
+                            <td><?php echo $row['FreelancerID'];?></td>
+                            <td><a href="<?php echo APPURL;?>/views/client/view_posts.php?id=<?php echo $row['PostID'];?>" class="btn btn-success text-center">Show Post</a></td>
+                            <td><?php echo $row['CV'];?></td>
+                            <td><?php echo $row['ProposalDate'];?></td>
+                            <td>
+                              <form action="<?php echo APPURL ?>/controllers/ClientController.php" method="POST">
+                                <button type="submit" name="accept_prop" value="<?= $row["ProposalID"]; ?>" class="btn btn-success text-center">Accept</button>
+                              </form>
+                            </td>
+                            <td>
+                              <form action="<?php echo APPURL ?>/controllers/ClientController.php" method="POST">
+                                <button type="submit" name="refuse_prop" value="<?= $row["ProposalID"]; ?>" class="btn btn-danger text-center">Refuse</button>
+                              </form>
+                            </td>
+                          </tr>
+                        <?php 
+                        endforeach;
+                        } else { ?>
+                        <div class="bg-success text-white">You Don't have any Proposals just yet</div>
+                        <?php }?>
+                      </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </main>
+
+
+
 
 <?php
 require 'c:\xampp\htdocs\SW1_Project\include\footerProfile.php';

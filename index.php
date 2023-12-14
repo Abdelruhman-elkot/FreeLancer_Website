@@ -263,7 +263,7 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
                 $statue = $row['Status'];
             if($statue === 'Accepted'){ ?>
                 <div class="col-md-6" id="postBox">
-                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black;">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="background-color: black; max-height: 295px;">
                 <div class="col p-4 d-flex flex-column position-static" style="color: white;">
                 <strong class="d-inline-block mb-2 text-primary-emphasis"><?php echo $row['FirstName'];?></strong>
                 <h3 class="mb-0"><?php echo $row['JobPostTitle'];?></h3>
@@ -271,7 +271,9 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
                         <span><i class="bi bi-calendar"></i><?php echo $row['CreationDate'];?></span>
                         <span style="margin-left: 20px;"><i class="bi bi-people"></i><?php echo "Number Of Proposals:" . $row['ProposalCount'];?></span>
                         </div>
-                    <p class="card-text mb-auto"><?php echo $row['JobDescription'];?></p>
+                        <div style="max-height: 121px;">
+                          <p class="card-text mb-auto"><?php echo $row['JobDescription'];?></p>
+                        </div>
                     <div>
                         <span style="float: right;">
                         <a href="<?php echo APPURL;?>/views/freelancer/postDetails.php?PostID=<?php echo ($row['PostID']); ?>" name="show_details" class="icon-link gap-1 icon-link-hover stretched-link" style="border: #47b2e4; 
@@ -320,8 +322,8 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
               <img src="assets/imgs/team/Abdelruhman.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
+                  <h4>Abdelruhman elkot</h4>
+                  <span>Backend Developer</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
@@ -338,7 +340,7 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
               <img src="assets/imgs/team/Amir.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Sarah Jhonson</h4>
+                  <h4>Amir Khaled</h4>
                   <span>Product Manager</span>
                 </div>
                 <div class="social">
@@ -356,7 +358,7 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
               <img src="assets/imgs/team/Subway.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>William Anderson</h4>
+                  <h4>Ahmed Hesham</h4>
                   <span>CTO</span>
                 </div>
                 <div class="social">
@@ -374,7 +376,7 @@ require 'c:\xampp\htdocs\SW1_Project\include\headerhome.php';
               <img src="assets/imgs/team/Ziad.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Amanda Jepson</h4>
+                  <h4>Ziad Yasser</h4>
                   <span>Accountant</span>
                 </div>
                 <div class="social">
